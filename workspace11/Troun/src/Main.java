@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  
 public class Main {
   public static void main(String[] args) {
-		
+	//prófa	
 	final JFrame f = new JFrame();
 	   
 	JPanel p = new JPanel();
