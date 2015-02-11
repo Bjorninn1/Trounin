@@ -124,6 +124,12 @@ public class OneClickTripPanel extends JPanel{
 	    c3.gridwidth = 2;   //2 columns wide
 	    c3.gridy = 6;       //third row
 	    this.add(searchButton3, c3);
+	    searchButton3.addActionListener(new ActionListener() {
+	            public void actionPerformed(ActionEvent ae) {
+	            	searchButtonAction(ae);
+	            }
+	    });
+
 	}
 
 	
@@ -137,7 +143,11 @@ public class OneClickTripPanel extends JPanel{
 		// TODO Auto-generated method stub
 		textReturn3.setText(new DatePicker(this).setPickedDate());
 	}
-
+	
+	private void searchButtonAction(ActionEvent ae) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

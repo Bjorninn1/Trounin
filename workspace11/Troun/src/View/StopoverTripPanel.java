@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Controller.DestinationTripController;
+
 
 public class StopoverTripPanel extends JPanel {
 	
@@ -140,6 +142,12 @@ public class StopoverTripPanel extends JPanel {
 	    c2.gridwidth = 2;   //2 columns wide
 	    c2.gridy = 7;       //third row
 	    this.add(searchButton2, c2);
+	    searchButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent ae) {
+            	searchButtonAction(ae);
+            }
+        });
+
 	}
 		
 		
@@ -154,7 +162,11 @@ public class StopoverTripPanel extends JPanel {
 			textReturn2.setText(new DatePicker(this).setPickedDate());
 		}
 
-		
+		private void searchButtonAction(ActionEvent ae) {
+			
+			
+			
+		}
 		
 	
 }
