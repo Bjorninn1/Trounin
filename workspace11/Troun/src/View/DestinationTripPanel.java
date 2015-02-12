@@ -3,18 +3,19 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Controller.DestinationTripController;
+import Model.Hotels;
+import Model.Trips;
 
 
 public class DestinationTripPanel extends JPanel {
@@ -153,145 +154,27 @@ public class DestinationTripPanel extends JPanel {
 	private void searchButtonAction(ActionEvent ae) {
 		DestinationTripController controller = new DestinationTripController();
 		
-		
 		String dateDeparture = textDeparture.getText();
+		String dateReturn = textReturn.getText();
+		
 		String fromAirport = (String) comboFrom.getSelectedItem();
 		String toAirport = (String) comboTo.getSelectedItem();
 		
-		controller.findTrips(dateDeparture, fromAirport, toAirport);
+		//departure flight
+		Trips[] trip = controller.findTrips(dateDeparture, fromAirport, toAirport);
+		
+		//return flight
+		Trips[] trip2 = controller.findTrips(dateReturn, toAirport, fromAirport);
+		
+	//	MainResultsView mainResultsView = new MainResultsView(trip, trip2);
+		Hotels[] hotel = controller.findHotels(dateDeparture, toAirport);
+
+		MainResultsView mainResultsView = new MainResultsView(trip, trip2, hotel);
+		mainResultsView.setVisible(true);
+
 		
 		
-		
-		//virkar
-		JFrame frame = new JFrame("Search Results");
-		JPanel panel = new JPanel();
-        frame.setLayout(new GridBagLayout());
-        panel.setPreferredSize(new Dimension(500, 500));
-		frame.setPreferredSize(new Dimension(500, 500));
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-      
-        
-      //Label From: 
-        JLabel labelFromEfst = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 1;
-        c.gridy = 0;
-        labelFromEfst.setText("From");
-        frame.add(labelFromEfst, c);
-        
-        //Label To: 
-        JLabel labelToEfst = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 2;
-        c.gridy = 0;
-        labelToEfst.setText("To");
-        frame.add(labelToEfst, c);
-        
-        //Label Date: 
-        JLabel labelDateEfst = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 3;
-        c.gridy = 0;
-        labelDateEfst.setText("Date");
-        frame.add(labelDateEfst, c);
-        
-        //Label Price: 
-        JLabel labelPriceEfst = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 4;
-        c.gridy = 0;
-        labelPriceEfst.setText("Price");
-        frame.add(labelPriceEfst, c);
-        
-        //Label Time: 
-        JLabel labelTimeEfst = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 5;
-        c.gridy = 0;
-        labelTimeEfst.setText("Time");
-        frame.add(labelTimeEfst, c);
-        
-        //Label Airline: 
-        JLabel labelAirlineEfst = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 6;
-        c.gridy = 0;
-        labelAirlineEfst.setText("Airline");
-        frame.add(labelAirlineEfst, c);
-        
-        
-        
-        
-        
-        
-        
-        //Label From: 
-        JLabel labelFrom = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 1;
-        c.gridy = 1;
-        labelFrom.setText(fromAirport);
-        frame.add(labelFrom, c);
-        
-        //Label To: 
-        JLabel labelTo = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 2;
-        c.gridy = 1;
-        labelTo.setText(toAirport);
-        frame.add(labelTo, c);
-        
-        //Label Date: 
-        JLabel labelDate = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 3;
-        c.gridy = 1;
-        labelDate.setText(dateDeparture);
-        frame.add(labelDate, c);
-        
-        //Label Price: 
-        JLabel labelPrice = new JLabel();
-        c.weightx = 0.5;
-        c.gridx = 4;
-        c.gridy = 1;
-        labelPrice.setText(String.valueOf(controller.prices[0]));
-        frame.add(labelPrice, c);
-        
-        
-        
-        frame.add(panel);
-        frame.pack();
-        frame.setVisible(true);
-	
-		/*
-	     JFrame frame = new JFrame("Example of TableLayout");
-	        frame.setSize(450, 450);
-
-	        double size[][] = {{10, 75, 75, 75, 75, 75, 10}, // Columns
-	            {10, 75, 75, 75, 75, 75, 10}}; // Rows
-
-	        //frame.setLayout(new LayoutManager(new Dimension(500,500)));
-
-
-	        String label[] = {"(1,1)", "(1,5)", "(1,3)", "(5,3)", "(3,3)"};
-	        JButton button[] = new JButton[label.length];
-
-	        for (int i = 0; i < label.length; i++) {
-	            button[i] = new JButton(label[i]);
-	        }
-
-
-	        frame.add(button[0], "1, 1");
-	        frame.add(button[1], "1, 5");
-	        frame.add(button[2], "1, 3");
-	        frame.add(button[3], "5, 3");
-	        frame.add(button[4], "3, 3");
-
-	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        frame.setVisible(true);
-	    }
-		*/
+		//næst bæta þessu við
 		
 	}
 

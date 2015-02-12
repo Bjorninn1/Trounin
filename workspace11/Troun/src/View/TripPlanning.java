@@ -10,6 +10,9 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
+
+//þessi klasi býr til Panel með 3 tabs úr klösunum DestinationTripPanel, StopoverTripPanel og OneClickTripPanel
+
 public class TripPlanning extends JPanel {
 	
 	final JTabbedPane tabbedPane;
