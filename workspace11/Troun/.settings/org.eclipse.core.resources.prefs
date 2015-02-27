@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
-encoding//src/Controller/DestinationTripController.java=UTF-8
-encoding//src/View/DestinationTripPanel.java=UTF-8
-encoding//src/View/MainResultsView.java=UTF-8
-encoding//src/View/StopoverTripPanel.java=UTF-8
-encoding//src/View/TripPlanning.java=UTF-8
+encoding//src/controller/DestinationTripController.java=UTF-8
+encoding//src/model/Hotels.java=UTF-8
+encoding//src/view/DestinationTripPanel.java=UTF-8
+encoding//src/view/MainResultsView.java=UTF-8
+encoding//src/view/StopoverTripPanel.java=UTF-8
+encoding//src/view/TripPlanning.java=UTF-8
+encoding//src/view/ViewUtils.java=UTF-8

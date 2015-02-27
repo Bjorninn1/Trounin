@@ -1,4 +1,4 @@
-package View;
+package view;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -11,23 +11,25 @@ import java.awt.GridLayout;
 import java.awt.event.KeyEvent;
 
 
-//þessi klasi býr til Panel með 3 tabs úr klösunum DestinationTripPanel, StopoverTripPanel og OneClickTripPanel
+//??essi klasi b??r til Panel me?? 3 tabs ??r kl??sunum DestinationTripPanel, StopoverTripPanel og OneClickTripPanel
 
 public class TripPlanning extends JPanel {
 	
 	final JTabbedPane tabbedPane;
 	
 	private static final long serialVersionUID = 1L;
-
+	
+	JPanel tab1;
+    JPanel tab2;
+    JPanel tab3;
+    
 	public TripPlanning() {
 		
 		super(new GridLayout(1, 1));
          
         tabbedPane = new JTabbedPane();
         
-        JPanel tab1;
-        JPanel tab2;
-        JPanel tab3;
+        
         
         
         tab1 = new DestinationTripPanel();
@@ -35,15 +37,15 @@ public class TripPlanning extends JPanel {
         tab3 = new OneClickTripPanel();
         
         tabbedPane.addTab("Destination trip", null, tab1,
-                "Does nothing");
+                "list of available flights and hotels");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
         
         tabbedPane.addTab("Stopover trip", null, tab2,
-                "Does twice as much nothing");
+                "list of stopover options in Iceland");
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
         
         tabbedPane.addTab("One-click flight+hotel", null, tab3,
-                "Still does nothing");
+                "list of available flights and your preferred hotel");
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
             
         JComponent panel1 = makeTextPanel("");
@@ -70,7 +72,7 @@ public class TripPlanning extends JPanel {
         //The following line enables to use scrolling tabs.
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         
-	}//constructor endar hér
+	}//constructor endar h??r
     
     
 	protected JComponent makeTextPanel(String text) {
@@ -107,8 +109,8 @@ public class TripPlanning extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 //Turn off metal's use of bold fonts
-        UIManager.put("swing.boldMetal", Boolean.FALSE);
-        createAndShowGUI();
+		        UIManager.put("swing.boldMetal", Boolean.FALSE);
+		        createAndShowGUI();
             }
         });
     }

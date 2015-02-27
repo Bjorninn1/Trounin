@@ -1,4 +1,4 @@
-package View;
+package view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,12 +15,8 @@ import javax.swing.JTextField;
 public class OneClickTripPanel extends JPanel{
 		
 	private static final long serialVersionUID = 1L;
-		final JTextField textDeparture3;
-		final JTextField textReturn3;
-	    
-		String[] itemsFrom3 = new String[]{"Choose!", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
-	    String[] itemsTo3 = new String[]{"Choose!", "Reykjavik", "Akureyri"};
-	    String[] itemsBudget3 = new String[]{"choose hotel", "Hotel Cabin", "Hotel 101", "Hotel Saga",};
+		JTextField textDeparture3;
+		JTextField textReturn3;
 	    
 	    JComboBox<String> comboFrom3;
 	    JComboBox<String> comboTo3;
@@ -53,7 +49,7 @@ public class OneClickTripPanel extends JPanel{
 	    
 	    //DropDown menu for home location
 	    
-	    comboFrom3 = new JComboBox<>(itemsFrom3);
+	    comboFrom3 = new JComboBox<>(ViewUtils.getDropDownFrom());
 	    c3.weightx = 0.5;
 	    c3.gridx = 0;
 	    c3.gridy = 1;
@@ -62,14 +58,14 @@ public class OneClickTripPanel extends JPanel{
 	    
 	    //DropDown menu for arrival location
 	    
-	    comboTo3 = new JComboBox<>(itemsTo3);
+	    comboTo3 = new JComboBox<>(ViewUtils.getDropDownTo());
 	    c3.gridx = 1;
 	    c3.gridy = 1;
 	    this.add(comboTo3, c3);
 	   
 	  	//DropDown menu for arrival location
 	    
-	    comboBudget3 = new JComboBox<>(itemsBudget3);
+	    comboBudget3 = new JComboBox<>(ViewUtils.getDropDownHotel());
 	    //c.ipady = 40; 
 	    c3.gridwidth = 3;
 	    c3.weightx = 0.0;
@@ -134,18 +130,15 @@ public class OneClickTripPanel extends JPanel{
 
 	
 	private void departureDateAction(ActionEvent ae) {
-		// TODO Auto-generated method stub
 		textDeparture3.setText(new DatePicker(this).setPickedDate());
 	}
 	
 	
 	private void returnDateAction(ActionEvent ae) {
-		// TODO Auto-generated method stub
 		textReturn3.setText(new DatePicker(this).setPickedDate());
 	}
 	
 	private void searchButtonAction(ActionEvent ae) {
-		// TODO Auto-generated method stub
 		
 	}
 	

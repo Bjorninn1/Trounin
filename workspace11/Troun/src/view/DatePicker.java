@@ -1,4 +1,4 @@
-package View;
+package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -21,9 +21,7 @@ public class DatePicker {
   String day = "";
   JDialog d;
   JButton[] button = new JButton[49];
- 
-  
-  
+   
   public DatePicker(JComponent location) {  
 	d = new JDialog();
     d.setModal(true);
@@ -68,10 +66,10 @@ public class DatePicker {
     // Next month button
     JButton next = new JButton("Next >>");
     next.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent ae) {
-        month++;
-        displayDate();
-      }
+	    public void actionPerformed(ActionEvent ae) {
+	        month++;
+	        displayDate();
+	      }
     });
     p2.add(next);
      

@@ -1,4 +1,4 @@
-package View;
+package view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -17,8 +17,8 @@ public class StopoverTripPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 		//instance variables for panel2:
-		final JTextField textDeparture2;	
-		final JTextField textReturn2;
+		JTextField textDeparture2;	
+		JTextField textReturn2;
 		
 		JComboBox<String> comboFrom2;
 		JComboBox<String> comboTo2;
@@ -29,12 +29,10 @@ public class StopoverTripPanel extends JPanel {
 		JButton returnDate2;
 		JButton searchButton2;
 		
-		String[] itemsFrom2 = new String[]{"Choose!", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
-		String[] itemsTo2 = new String[]{"Choose!", "New York", "Boston"};
-		String[] itemsBudget2 = new String[]{"choose budget", "€1000", "€2000"};
-		String[] itemsIceland = new String[]{"specify area in Iceland", "Reykjavik", "Akureyri"};
+		
+		
 	
-		public StopoverTripPanel(){
+	public StopoverTripPanel() {
 		this.setLayout(new GridBagLayout());
 	    GridBagConstraints c2 = new GridBagConstraints();
 	    c2.fill = GridBagConstraints.HORIZONTAL;
@@ -54,7 +52,7 @@ public class StopoverTripPanel extends JPanel {
 	    
 	    //DropDown menu for home location
 	    
-	    comboFrom2 = new JComboBox<>(itemsFrom2);
+	    comboFrom2 = new JComboBox<>(ViewUtils.getDropDownFrom());
 	    c2.weightx = 0.5;
 	    c2.gridx = 0;
 	    c2.gridy = 1;
@@ -63,7 +61,7 @@ public class StopoverTripPanel extends JPanel {
 	    
 	    //DropDown menu for arrival location
 	    
-	    comboTo2 = new JComboBox<>(itemsTo2);
+	    comboTo2 = new JComboBox<>(ViewUtils.getDropDownTo());
 	    c2.gridx = 1;
 	    c2.gridy = 1;
 	    this.add(comboTo2, c2);
@@ -111,7 +109,7 @@ public class StopoverTripPanel extends JPanel {
 	    
 	    //DropDown menu to specify area in Iceland
 	    
-	    comboIceland = new JComboBox<>(itemsIceland);
+	    comboIceland = new JComboBox<>(ViewUtils.getDropDownArea());
 	    //c.ipady = 40; 
 	    c2.gridwidth = 3;
 	    c2.weightx = 0.0;
@@ -122,7 +120,7 @@ public class StopoverTripPanel extends JPanel {
 	    
 	    //DropDown menu for arrival location
 	    
-	    comboBudget2 = new JComboBox<>(itemsBudget2);
+	    comboBudget2 = new JComboBox<>(ViewUtils.getDropDownBudget());
 	    //c.ipady = 40; 
 	    c2.gridwidth = 3;
 	    c2.weightx = 0.0;
@@ -151,13 +149,11 @@ public class StopoverTripPanel extends JPanel {
 		
 		
 		private void departureDateAction(ActionEvent ae) {
-			// TODO Auto-generated method stub
 			textDeparture2.setText(new DatePicker(this).setPickedDate());
 		}
 		
 		
 		private void returnDateAction(ActionEvent ae) {
-			// TODO Auto-generated method stub
 			textReturn2.setText(new DatePicker(this).setPickedDate());
 		}
 
@@ -167,5 +163,5 @@ public class StopoverTripPanel extends JPanel {
 			
 		}
 		
-	
+		
 }

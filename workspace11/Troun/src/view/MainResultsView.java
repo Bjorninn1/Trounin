@@ -1,4 +1,4 @@
-package View;
+package view;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -8,14 +8,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Model.Hotels;
-import Model.Trips;
+import model.Hotels;
+import model.Trips;
+
+
+
+
 
 public class MainResultsView extends JFrame {
+	
+	
 	
 	private static final long serialVersionUID = 1L;
 
 	public MainResultsView(Trips[] trip, Trips[] trip2, Hotels[] hotel){
+			
 		
 				JPanel panel = new JPanel();
 		        this.setLayout(new GridBagLayout());
@@ -33,7 +40,7 @@ public class MainResultsView extends JFrame {
 		        labelTitle1.setText("Departure Flights: ");
 		        this.add(labelTitle1, c);
 		        
-		        //eftirfarandi labels eru titlar fyrir þær leitarniðurstöðurnar eiga að birtast fyrir trip
+		        //eftirfarandi labels eru titlar fyrir ????r leitarni??urst????urnar eiga a?? birtast fyrir trip
 		        //Label From
 		        JLabel labelFromEfst = new JLabel();
 		        c.weightx = 0.5;
@@ -91,7 +98,7 @@ public class MainResultsView extends JFrame {
 		        this.add(labelTimeDepartureEfst, c);
 		        
 		        
-		        //eftirfarandi labels sýna leitarniðurstöður fyrir trip
+		        //eftirfarandi labels s??na leitarni??urst????ur fyrir trip
 		        for(int i=0; i<trip.length; i++){   
 		        
 			        JLabel labelFrom = new JLabel();
@@ -155,7 +162,7 @@ public class MainResultsView extends JFrame {
 		        
 		        
 		        
-		        //eftirfarandi labels eru titlar fyrir þær leitarniðurstöðurnar eiga að birtast fyrir trip2
+		        //eftirfarandi labels eru titlar fyrir ????r leitarni??urst????urnar eiga a?? birtast fyrir trip2
 		        //Label From
 		        JLabel labelFromEfst2 = new JLabel();
 		        c.weightx = 0.5;
@@ -216,21 +223,21 @@ public class MainResultsView extends JFrame {
 		        
 		        
 		        
-		        //eftirfarandi labels sýna leitarniðurstöður fyrir trip2
+		        //eftirfarandi labels s??na leitarni??urst????ur fyrir trip2
 		        for(int i=0; i<trip2.length; i++){   
 		        
 			        JLabel labelFrom = new JLabel();
 			        c.weightx = 0.5;
 			        c.gridx = 1;
 			        c.gridy = 1+trip.length+3+i;
-			        labelFrom.setText(trip2[i].toAirport); //from label sýnir toAirport því þetta er return flight
+			        labelFrom.setText(trip2[i].toAirport); //from label s??nir toAirport ??v?? ??etta er return flight
 			        this.add(labelFrom, c);
 			        
 			        JLabel labelTo = new JLabel();
 			        c.weightx = 0.5;
 			        c.gridx = 2;
 			        c.gridy = 1+trip.length+3+i;
-			        labelTo.setText(trip2[i].fromAirport); //to label sýnir fromAirport því þetta er return flight
+			        labelTo.setText(trip2[i].fromAirport); //to label s??nir fromAirport ??v?? ??etta er return flight
 			        this.add(labelTo, c);
 			        
 			        JLabel labelDate = new JLabel();
@@ -279,7 +286,7 @@ public class MainResultsView extends JFrame {
 		        this.add(labelTitle3, c);
 		        
 		        
-		        //eftirfarandi labels eru titlar fyrir þær leitarniðurstöðurnar eiga að birtast fyrir hotel
+		        //eftirfarandi labels eru titlar fyrir ????r leitarni??urst????urnar eiga a?? birtast fyrir hotel
 		        //Label HotelName
 		        JLabel labelHotelNameEfst3 = new JLabel();
 		        c.weightx = 0.5;
@@ -314,21 +321,21 @@ public class MainResultsView extends JFrame {
 		        
 		        
 		        
-		        //eftirfarandi labels sýna leitarniðurstöður fyrir hotel
+		        //eftirfarandi labels s??na leitarni??urst????ur fyrir hotel
 		        for(int i=0; i<hotel.length; i++){   
 		        
 			        JLabel labelHotelName = new JLabel();
 			        c.weightx = 0.5;
 			        c.gridx = 1;
 			        c.gridy = trip.length+trip2.length+6+i;
-			        labelHotelName.setText(hotel[i].hotelName); //from label sýnir toAirport því þetta er return flight
+			        labelHotelName.setText(hotel[i].hotelName); //from label s??nir toAirport ??v?? ??etta er return flight
 			        this.add(labelHotelName, c);
 			        
 			        JLabel labelDateFrom = new JLabel();
 			        c.weightx = 0.5;
 			        c.gridx = 2;
 			        c.gridy = trip.length+trip2.length+6+i;
-			        labelDateFrom.setText(hotel[i].dateCheckIn); //to label sýnir fromAirport því þetta er return flight
+			        labelDateFrom.setText(hotel[i].dateCheckIn); //to label s??nir fromAirport ??v?? ??etta er return flight
 			        this.add(labelDateFrom, c);
 			       
 			        /*NEXT TO IMPLEMENT
@@ -344,7 +351,7 @@ public class MainResultsView extends JFrame {
 			        c.weightx = 0.5;
 			        c.gridx = 4; 
 			        c.gridy = trip.length+trip2.length+6+i;
-			        labelPrice.setText(hotel[i].price);
+			        labelPrice.setText(String.valueOf(hotel[i].price));
 			        this.add(labelPrice, c);
 			   
 		        }

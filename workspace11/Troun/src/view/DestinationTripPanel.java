@@ -1,40 +1,31 @@
-package View;
+package view;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import controller.DestinationTripController;
 
-import Controller.DestinationTripController;
-import Model.Hotels;
-import Model.Trips;
 
 
 public class DestinationTripPanel extends JPanel {
 	
 		private static final long serialVersionUID = 1L;
 		//instance variables for panel1: 
-		final JTextField textDeparture;
-		final JTextField textReturn;
+		JTextField textDeparture;
+		JTextField textReturn;
 		JComboBox<String> comboFrom;
 		JComboBox<String> comboTo;
 		JComboBox<String> comboBudget;
 		JButton departureDate;
 		JButton returnDate;
 		JButton searchButton;
-		
-		String[] itemsFrom = new String[]{"Choose!", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
-		String[] itemsTo = new String[]{"Choose!", "Keflavik", "Akureyri"};
-		String[] itemsBudget = new String[]{"choose budget", "€1000", "€2000"};
-		
 		
 		
 	public DestinationTripPanel() {
@@ -59,7 +50,7 @@ public class DestinationTripPanel extends JPanel {
         
         //DropDown menu for home location
 
-        comboFrom = new JComboBox<>(itemsFrom);
+        comboFrom = new JComboBox<>(ViewUtils.getDropDownFrom());
         c.weightx = 0.5;
         c.gridx = 0;
         c.gridy = 1;
@@ -67,14 +58,14 @@ public class DestinationTripPanel extends JPanel {
 
         //DropDown menu for arrival location
         
-        comboTo = new JComboBox<>(itemsTo);
+        comboTo = new JComboBox<>(ViewUtils.getDropDownTo());
         c.gridx = 1;
         c.gridy = 1;
         this.add(comboTo, c);
        
       	//DropDown menu for arrival location
         
-        comboBudget = new JComboBox<>(itemsBudget);
+        comboBudget = new JComboBox<>(ViewUtils.getDropDownBudget());
         //c.ipady = 40; 
         c.gridwidth = 3;
         c.weightx = 0.0;
@@ -107,7 +98,7 @@ public class DestinationTripPanel extends JPanel {
         returnDate.setText("Return Date");
         textReturn = new JTextField(20);
         returnDate.addActionListener(new ActionListener() {
-        	//ath. sjá returnDateAction(ae) fyrir neðan constructor (sú aðferð tekur við eventinum) 
+        	//ath. sj?? returnDateAction(ae) fyrir ne??an constructor (s?? a??fer?? tekur vi?? eventinum) 
             public void actionPerformed(ActionEvent ae) {
             	returnDateAction(ae);
             }
@@ -140,42 +131,28 @@ public class DestinationTripPanel extends JPanel {
         
 	}
 	
-	
 	private void returnDateAction(ActionEvent ae){
 		textReturn.setText(new DatePicker(this).setPickedDate());
 	}
 	
 	 protected void departureDateAction(ActionEvent ae) {
-	    	textDeparture.setText(new DatePicker(this).setPickedDate());
-		}
-	
-	 
+	    textDeparture.setText(new DatePicker(this).setPickedDate());
+	}
 	
 	private void searchButtonAction(ActionEvent ae) {
-		DestinationTripController controller = new DestinationTripController();
 		
 		String dateDeparture = textDeparture.getText();
 		String dateReturn = textReturn.getText();
-		
 		String fromAirport = (String) comboFrom.getSelectedItem();
 		String toAirport = (String) comboTo.getSelectedItem();
+		String budgetString = (String) comboBudget.getSelectedItem();
+		int budget = Integer.parseInt(budgetString);
 		
-		//departure flight
-		Trips[] trip = controller.findTrips(dateDeparture, fromAirport, toAirport);
-		
-		//return flight
-		Trips[] trip2 = controller.findTrips(dateReturn, toAirport, fromAirport);
-		
-	//	MainResultsView mainResultsView = new MainResultsView(trip, trip2);
-		Hotels[] hotel = controller.findHotels(dateDeparture, toAirport);
-
-		MainResultsView mainResultsView = new MainResultsView(trip, trip2, hotel);
-		mainResultsView.setVisible(true);
-
-		
-		
-		//næst bæta þessu við
-		
+		DestinationTripController controller = new DestinationTripController();
+		controller.setTrip1(dateDeparture, fromAirport, toAirport);
+		controller.setTrip2(dateReturn, fromAirport, toAirport);
+		controller.setBudget(budget);
+		controller.search();
 	}
 
 }
