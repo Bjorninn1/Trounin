@@ -2,7 +2,7 @@ package controller;
 import model.*;
 public class Controller {
     HotelManager hotelManager = new HotelManager();
-    FlightManager flightManager = new FlightManager();
+    FlightSearch flightManager = new FlightSearch();
     //Use: contoller.searchFlight(date, fromAirport, toAirport, numberPeople, budget)
     //Pre: controller is an initialised object of this class, inputs have to make sense
     //Post: returns an array of flights that match the criteria

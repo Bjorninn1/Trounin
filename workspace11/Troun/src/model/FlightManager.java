@@ -1,8 +1,8 @@
 package model;
 import java.sql.*;
 import java.util.ArrayList;
-public class FlightManager {
-	public FlightManager() {
+public class FlightSearch {
+	public FlightSearch() {
 		
 	}
     //Use: hotelManager.findHotels(budget,date,numOfPeople,location)
