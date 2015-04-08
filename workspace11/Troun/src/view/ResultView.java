@@ -1,3 +1,6 @@
+package view;
+import model.*;
+import controller.*;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

@@ -1,3 +1,4 @@
+package model;
 public class Flight {
     private String date;
     private String departureAirport;

@@ -1,3 +1,5 @@
+package controller;
+import model.*;
 public class Controller {
     HotelManager hotelManager = new HotelManager();
     FlightManager flightManager = new FlightManager();

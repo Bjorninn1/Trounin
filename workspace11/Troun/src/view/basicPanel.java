@@ -1,3 +1,6 @@
+package view;
+import model.*;
+import controller.*;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;

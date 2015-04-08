@@ -1,3 +1,4 @@
+package model;
 
 public class Hotel {
     private String date;

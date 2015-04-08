@@ -1,4 +1,7 @@
 package view;
+import model.*;
+import controller.*;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -13,155 +16,108 @@ import javax.swing.JTextField;
 
 
 
-public class StopoverTripPanel extends JPanel {
+public class StopoverTripPanel extends basicPanel {
 	
 	private static final long serialVersionUID = 1L;
-		//instance variables for panel2:
-		JTextField textDeparture2;	
-		JTextField textReturn2;
-		
-		JComboBox<String> comboFrom2;
-		JComboBox<String> comboTo2;
-		JComboBox<String> comboBudget2;
-		JComboBox<String> comboIceland;
-		
-		JButton departureDate2;
-		JButton returnDate2;
-		JButton searchButton2;
-		
-		
-		
+	//instance variables for panel2:
+
+	JComboBox<String> comboBudget;
+	JComboBox<String> comboIceland;
 	
-	public StopoverTripPanel() {
+	
+	String[] itemsTo2 = new String[]{"Choose!", "New York", "Boston"};
+	String[] itemsIceland = new String[]{"specify area in Iceland", "Reykjavik", "Akureyri"};
+
+	public StopoverTripPanel(){
+        this.setPreferredSize(new Dimension(1000, 500));
 		this.setLayout(new GridBagLayout());
 	    GridBagConstraints c2 = new GridBagConstraints();
 	    c2.fill = GridBagConstraints.HORIZONTAL;
-	       
-	    //Label From: 
-	    JLabel labelFrom2 = new JLabel("   From: ");
-	    c2.weightx = 0.5;
-	    c2.gridx = 0;
-	    c2.gridy = 0;
-	    this.add(labelFrom2, c2);
-	
+	    this.init(c2);
+	}
+
+	private void init(GridBagConstraints c) {
+		//Label From: 
+	    this.addLabel(c,"   From: ",0,2,0,0);	    
+
 	    //Label To: 
-	    JLabel labelTo2 = new JLabel("   To: ");
-	    c2.gridx = 1;
-	    c2.gridy = 0;
-	    this.add(labelTo2, c2);
+	    this.addLabel(c,"   To: ",0,2,2,0);
 	    
 	    //DropDown menu for home location
+	    this.setComboFrom(c, this.getItemsFrom());
 	    
-	    comboFrom2 = new JComboBox<>(ViewUtils.getDropDownFrom());
-	    c2.weightx = 0.5;
-	    c2.gridx = 0;
-	    c2.gridy = 1;
-	    this.add(comboFrom2, c2);
-	
+	    //DropDown menu for arrival addText
+		this.setComboTo(c, this.getItemsToIceland());
 	    
-	    //DropDown menu for arrival location
-	    
-	    comboTo2 = new JComboBox<>(ViewUtils.getDropDownTo());
-	    c2.gridx = 1;
-	    c2.gridy = 1;
-	    this.add(comboTo2, c2);
 	        
-	  //button for departure date, date picker 
-	    departureDate2 = new JButton();
-	    departureDate2.setText("Departure Date");
-	    textDeparture2 = new JTextField(20);
-	    departureDate2.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent ae) {
-            	departureDateAction(ae);
-            }
-
-			
-        });
-	    c2.gridwidth = 1;
-	    c2.weightx = 0.5;
-	    c2.gridx = 0;
-	    c2.gridy = 4;
-	    this.add(textDeparture2, c2);
-	    c2.gridx = 0;
-	    c2.gridy = 3;
-	    this.add(departureDate2, c2);
+	 	//button for departure date, date picker 
+	    this.departureDate = this.addButton(c,"Departure Date",0,2,0,3);
+	    //departureDate2.setText("Departure Date");
+	    this.textDeparture = this.addTextField(c,20,this.getDate(),0,2,0,4);
+	    
+	    
 	    
 	    //button for return date, date picker 
-	    returnDate2 = new JButton();
-	    returnDate2.setText("Departure Date From Iceland");
-	    textReturn2 = new JTextField(20);
-	    returnDate2.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent ae) {
-            	returnDateAction(ae);
-            }
+	    this.returnDate = this.addButton(c,"Departure Date From Iceland",0,2,2,3);
+	    //returnDate2.setText("Departure Date From Iceland");
+	    this.textReturn = this.addTextField(c,20,this.getDate(),0,2,2,4);
+	    
 
-			
-        });
-	    c2.gridwidth = 1;
-	    c2.gridx = 1;
-	    c2.gridy = 4;
-	    this.add(textReturn2, c2);
-	    
-	    c2.gridx = 1;
-	    c2.gridy = 3;
-	    this.add(returnDate2, c2);
-	    
+	    this.addLabel(c,"Nr. People",0,1,0,5);
+	    this.setTFnumPeople(c, 10);
 	    
 	    //DropDown menu to specify area in Iceland
 	    
-	    comboIceland = new JComboBox<>(ViewUtils.getDropDownArea());
-	    //c.ipady = 40; 
-	    c2.gridwidth = 3;
-	    c2.weightx = 0.0;
-	    c2.gridx = 0;
-	    c2.gridy = 5;
-	    this.add(comboIceland, c2);
-	    
+	    this.comboIceland = this.addComboBox(c,this.getItemsToIceland(),0,4,0,6);
 	    
 	    //DropDown menu for arrival location
 	    
-	    comboBudget2 = new JComboBox<>(ViewUtils.getDropDownBudget());
-	    //c.ipady = 40; 
-	    c2.gridwidth = 3;
-	    c2.weightx = 0.0;
-	    c2.gridx = 0;
-	    c2.gridy = 6;
-	    this.add(comboBudget2, c2);
+	    this.comboBudget = this.addComboBox(c,this.getItemsBudget(),0,4,0,7);
 	
 	    
 	    //search button
-	    searchButton2 = new JButton("Search");
-	    c2.ipady = 0;       //reset to default
-	    c2.weighty = 1.0;   //request any extra vertical space
-	    c2.anchor = GridBagConstraints.PAGE_END; //bottom of space
-	    c2.insets = new Insets(10,0,0,0);  //top padding
-	    c2.gridx = 1;       //aligned with button 2
-	    c2.gridwidth = 2;   //2 columns wide
-	    c2.gridy = 7;       //third row
-	    this.add(searchButton2, c2);
-	    searchButton2.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-            	searchButtonAction(ae);
-            }
-        });
+	    this.searchButton = this.addButton(c,"Search",0,2,2,8);
+	    
+	    c.anchor = GridBagConstraints.PAGE_END; //bottom of space
+	    c.insets = new Insets(10,0,0,0);  //top padding
+	    
+	    this.inputActions();
 
 	}
-		
-		
-		private void departureDateAction(ActionEvent ae) {
-			textDeparture2.setText(new DatePicker(this).setPickedDate());
-		}
-		
-		
-		private void returnDateAction(ActionEvent ae) {
-			textReturn2.setText(new DatePicker(this).setPickedDate());
-		}
 
-		private void searchButtonAction(ActionEvent ae) {
-			
-			
-			
-		}
-		
-		
+	public void parseInfo(String dateDeparture, String dateReturn) {
+		//String dateDeparture = this.getDepartureDate();
+        //String dateReturn = this.getReturnDate();
+        String fromAirport = (String) this.getComboFrom().getSelectedItem();
+        String toAirport = (String) this.getComboTo().getSelectedItem();
+        String locationIceland = (String) this.comboIceland.getSelectedItem();
+        int numberPeople = Integer.parseInt(this.getNumberPeople());
+        String result = "";
+        if(!validateDates(dateDeparture,dateReturn))
+            result += "Fix Dates \n";
+        if(fromAirport.equals(this.getItemsFrom()[0]) || toAirport.equals(this.itemsTo2[0]) || locationIceland.equals(this.getItemsToIceland()[0]))
+            result += "Fix departure/return locations/location in Iceland";
+        if(!result.equals("")) {
+            this.infoBox(result,"Error");
+            return;
+        }
+        Flight[][] flights;
+    	Hotel[] hotels;
+        if(locationIceland.equals(itemsIceland[1])) {
+            Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
+            hotels = this.searchHotel(dateDeparture, locationIceland, numberPeople, 300);
+            Flight[] flights2 = this.searchFlight(dateReturn, this.mainAirport, toAirport, numberPeople, 300);
+            flights = new Flight[][] {flights1, flights2};
+        }else{
+            Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
+            Flight[] flights2 = this.searchFlight(dateDeparture, this.mainAirport, locationIceland, numberPeople, 300);
+            hotels = this.searchHotel(dateDeparture,locationIceland, numberPeople, 300);
+            Flight[] flights3 = this.searchFlight(dateReturn, locationIceland, this.mainAirport, numberPeople, 300); 
+            Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, toAirport, numberPeople, 300);   
+            flights = new Flight[][] {flights1, flights2, flights3, flights4};
+        }
+        TripPlanning.tripPlanning.showResultsView(hotels, flights);
+	}
+	
+
 }

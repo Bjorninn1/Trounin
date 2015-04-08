@@ -1,7 +1,10 @@
+package model;
+import java.sql.*;
+import java.util.ArrayList;
 public class HotelManager {
     
     public HotelManager() {
-    	
+        
     }
 
     //input is a lot of parameters that should match the hotel
@@ -17,6 +20,54 @@ public class HotelManager {
         }
         return hotels;
     }
+    //eða
+    /*public Hotel[] findHotels(int budget, String date, int numOfPeople, String location) {
+        Connection connection = null;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            
+            
+            connection = DriverManager.getConnection("jdbc:sqlite:Data6.db");
+            
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);  // set timeout to 30 sec.
+            PreparedStatement p = connection.prepareStatement("select * from Table1 where DateCheckIn = ? and Location = ? ");
+            p.setString(1, dateDeparture);
+            p.setString(2, location);
+            ResultSet rs = p.executeQuery();
+            
+            ArrayList<Hotels> a = new ArrayList<>();
+            
+            while(rs.next()) {
+                a.add(new Hotels(rs));
+            }
+            
+            return a.toArray(new Hotels[0]);
+
+        }
+        catch(SQLException e) {
+            // if the error message is "out of memory", 
+            // it probably means no database file is found
+            System.err.println(e.getMessage());
+             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if(connection != null)
+                connection.close();
+            }
+            catch(SQLException e) {
+             // connection close failed.
+             System.err.println(e);
+             e.printStackTrace();
+            }
+        }
+        //skilum engu ef það er villa
+        return null;
+    }*/
     
     //Use: hotelManager.getHotel(location, hotelName, numOfpeople, date, budget)
     //Pre: location is the city of the hotel your looking for, hotelName is it's name,

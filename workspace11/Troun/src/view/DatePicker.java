@@ -1,4 +1,6 @@
 package view;
+import model.*;
+import controller.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
