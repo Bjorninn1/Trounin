@@ -54,10 +54,10 @@ public class ResultView extends basicPanel {
 	public String[] parseFlightInfo(Flight[] flights) {
 		String[] results = new String[flights.length];
 		for(int i = 0; i < flights.length; i++) {
-			results[i] = "" + flights[i].getFlightId();
-			results[i] += " " + flights[i].getDate();
-			results[i] += " from: " + flights[i].getDepartureAirport();
-			results[i] += " to: " + flights[i].getArrivalAirport();	
+			results[i] = "" + flights[i].getFlightNumber();
+			results[i] += " " + flights[i].getDateTimeDeparture();
+			results[i] += " from: " + flights[i].getFromAirport();
+			results[i] += " to: " + flights[i].getToAirport();	
 			results[i] += " for: " + flights[i].getPrice();
 		}
 		return results;
