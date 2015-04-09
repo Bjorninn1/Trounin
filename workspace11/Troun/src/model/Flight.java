@@ -17,10 +17,10 @@ public class Flight {
         this.price = price;
         this.capacity = capacity;
     }
-    //Use:  flight.getFlightID();
+    //Use:  flight.getFlightNumber();
     //Pre:  flight has to be of type flight, and has been initialized
     //Post: returns an integer that's the flight's id
-    public int getFlightId() {
+    public int getFlightNumber() {
         return this.flightId;
     }
     //Use:  flight.getPrice()
@@ -29,28 +29,28 @@ public class Flight {
     public int getPrice() {
         return this.price;
     }
-    //Use: flight.getDepartureAirport();
+    //Use: flight.getFromAirport();
     //Pre: flight has to be of type flight, and has been initialized
     //Post: returns the flights departure airport
-    public String getDepartureAirport() {
+    public String getFromAirport() {
         return this.departureAirport;
     }
-    //Use: flight.getArrivalAirport();
+    //Use: flight.geToAirport();
     //Pre: flight has to be of type flight, and has been initialized
     //Post: return the flights arrival airport
-    public String getArrivalAirport() {
+    public String getToAirport() {
         return this.arrivalAirport;
     }
     //Use: flight.getDate();
     //Pre: flight has to be of type flight, and has been initialized
     //Post: returns the flights date of departure
-    public String getDate() {
+    public String getDateTimeDeparture() {
         return this.date;
     }
-    //Use: flight.getCapacity()
+    //Use: flight.getAvailableSeats()
     //Pre: flight has to be of type flight, and has been initialized
     //Post: returns the flights remaining capacity
-    public int getCapacity() {
+    public int getAvailableSeats() {
         return this.capacity;
     }
     //Use: flight.reduceCapacity(numberOfPassengers)
