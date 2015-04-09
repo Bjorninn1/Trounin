@@ -136,12 +136,16 @@ public abstract class basicPanel extends JPanel {
 	}
 	public void departureDateAction(ActionEvent ae) {
 		// TODO Auto-generated method stub
+	    this.textDeparture.setEditable(true);
 		this.textDeparture.setText(new DatePicker(this).setPickedDate());
+	    this.textDeparture.setEditable(false);
 	}
 	
 	public void returnDateAction(ActionEvent ae) {
 		// TODO Auto-generated method stub
+		this.textReturn.setEditable(true);
 		this.textReturn.setText(new DatePicker(this).setPickedDate());
+		this.textReturn.setEditable(false);
 	}
 	public void infoBox(String infoMessage, String titleBar){
         JOptionPane.showMessageDialog(null, infoMessage, "InfoBox: " + titleBar, JOptionPane.INFORMATION_MESSAGE);

@@ -54,6 +54,7 @@ public class StopoverTripPanel extends basicPanel {
 	    this.departureDate = this.addButton(c,"Departure Date",0,2,0,3);
 	    //departureDate2.setText("Departure Date");
 	    this.textDeparture = this.addTextField(c,20,this.getDate(),0,2,0,4);
+	    this.textDeparture.setEditable(false);
 	    
 	    
 	    
@@ -61,6 +62,7 @@ public class StopoverTripPanel extends basicPanel {
 	    this.returnDate = this.addButton(c,"Departure Date From Iceland",0,2,2,3);
 	    //returnDate2.setText("Departure Date From Iceland");
 	    this.textReturn = this.addTextField(c,20,this.getDate(),0,2,2,4);
+	    this.textReturn.setEditable(false);
 	    
 
 	    this.addLabel(c,"Nr. People",0,1,0,5);
