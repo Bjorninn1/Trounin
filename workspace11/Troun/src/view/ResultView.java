@@ -24,9 +24,13 @@ public class ResultView extends basicPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
+		c.insets = new Insets(5,5,5,5);
         this.init(c, hotels, flights);
 	}
-	public void init(GridBagConstraints c, Hotel[] hotels, Flight[][] flights) {
+	void init(GridBagConstraints c) {
+
+	}
+	private void init(GridBagConstraints c, Hotel[] hotels, Flight[][] flights) {
 		String[][] options = new String[1 + flights.length][10];
 		String[] labels = new String[] {"Hotel:  ", "Arrival Flight:  ", "Intermediary Flight A: ", "Intermediary Flight D: ", "Departure Flight :"};
 		lists = new JList[options.length];

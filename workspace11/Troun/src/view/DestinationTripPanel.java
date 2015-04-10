@@ -22,24 +22,13 @@ import javax.swing.JTextField;
 
 public class DestinationTripPanel extends basicPanel{
 	
-		private static final long serialVersionUID = 1L;
-		//instance variables for panel1: 
-		JComboBox<String> comboBudget;
-		
-		String[] itemsTo = new String[]{"Choose!", "Keflavik", "Akureyri"};
-		
-		
-		
-	public DestinationTripPanel() {
-        this.setPreferredSize(new Dimension(1000, 500));
-        
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.HORIZONTAL;
-        this.init(c);
-        
-	}
-	private void init(GridBagConstraints c) {
+	private static final long serialVersionUID = 1L;
+	//instance variables for panel1: 
+	JComboBox<String> comboBudget;
+	
+	String[] itemsTo = new String[]{"Choose!", "Keflavik", "Akureyri"};
+	
+	void init(GridBagConstraints c) {
         //Label From: 
         this.addLabel(c, "   From: ",0,1,0,0);
 

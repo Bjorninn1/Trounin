@@ -28,15 +28,7 @@ public class StopoverTripPanel extends basicPanel {
 	String[] itemsTo2 = new String[]{"Choose!", "New York", "Boston"};
 	String[] itemsIceland = new String[]{"specify area in Iceland", "Reykjavik", "Akureyri"};
 
-	public StopoverTripPanel(){
-        this.setPreferredSize(new Dimension(1000, 500));
-		this.setLayout(new GridBagLayout());
-	    GridBagConstraints c2 = new GridBagConstraints();
-	    c2.fill = GridBagConstraints.HORIZONTAL;
-	    this.init(c2);
-	}
-
-	private void init(GridBagConstraints c) {
+	void init(GridBagConstraints c) {
 		//Label From: 
 	    this.addLabel(c,"   From: ",0,2,0,0);	    
 

@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
 
 
 public abstract class basicPanel extends JPanel {
@@ -26,15 +28,27 @@ public abstract class basicPanel extends JPanel {
 	JButton searchButton;
 	private JComboBox<String> comboFrom;
 	private JComboBox<String> comboTo;
+	private JComboBox<String> comboHotels;
 	JComboBox<String> comboBudget;
 	String today = sdf.format(new Date()).toString();
 	String[] itemsToIceland = new String[]{"Specify area in Iceland", "Keflavik", "Akureyri"};
 	String defaultString = itemsToIceland[0];
 	String[] itemsFrom = new String[]{"select departure airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
 	String[] itemsBudget = new String[]{"choose budget", "€1000", "€2000"};
+    String[] hotels = new String[] {"Hotel 1", "Hotel 2", "Hotel 3"};
 	Controller controller = new Controller();
 
 	String mainAirport = "Keflavik";
+	public basicPanel() {
+		this.setPreferredSize(new Dimension(1000, 500));
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(5,5,5,5);
+        this.init(c);
+	}
+	abstract void init(GridBagConstraints c);
+
 	public JButton addButton(GridBagConstraints c, String text, double weightX, double gridwidth, int gridX, int gridY) {
 		JButton button = new JButton(text);
 		c.gridwidth = (int) gridwidth;
@@ -74,7 +88,6 @@ public abstract class basicPanel extends JPanel {
 	public JList addJList(GridBagConstraints c, String[] data, int gridWidth, int gridHeight, int gridX, int gridY) {
 		JList list = new JList(data);
 		//list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		c.insets = new Insets(5,5,5,5);
 		c.gridwidth = gridWidth;
 		c.gridheight = gridHeight;
 		c.gridx = gridX;
@@ -96,6 +109,12 @@ public abstract class basicPanel extends JPanel {
 	}
 	public JComboBox getComboBudget() {
 		return this.comboBudget;
+	}
+	public JComboBox getComboHotels() {
+		return this.comboHotels;
+	}
+	public void setComboHotels(GridBagConstraints c) {
+		this.comboHotels = this.addComboBox(c, this.hotels, 0, 4, 0, 7);
 	}
 	public String getNumberPeople() {
 		return this.getTFnumPeople().getText();

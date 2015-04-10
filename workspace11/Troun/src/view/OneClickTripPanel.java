@@ -20,26 +20,11 @@ public class OneClickTripPanel extends basicPanel{
 	private static final long serialVersionUID = 1L;
 	    
     String[] itemsTo3 = new String[]{"Choose!", "Keflavik", "Akureyri"};
-    String[] hotels = new String[] {"Hotel 1", "Hotel 2", "Hotel 3"};
     
     JComboBox<String> comboBudget;
     JComboBox<String> comboHotels;
     
-    
-	    
-		
-	public OneClickTripPanel(){
-		
-        this.setPreferredSize(new Dimension(1000, 500));
-	    this.setLayout(new GridBagLayout());
-	    GridBagConstraints c3 = new GridBagConstraints();
-	    c3.fill = GridBagConstraints.HORIZONTAL;
-		this.init(c3);
-	    
-
-	}
-
-	private void init(GridBagConstraints c) {
+	void init(GridBagConstraints c) {
 		//Label From: 
 	    this.addLabel(c, "   From: ",0,2,0,0);
 	
@@ -56,7 +41,8 @@ public class OneClickTripPanel extends basicPanel{
 	    
         this.comboBudget = this.addComboBox(c,this.getItemsBudget(),0,4,0,6);
 
-        this.comboHotels = this.addComboBox(c,this.hotels, 0, 4, 0, 7);
+        //this.getComboHotels() = this.addComboBox(c,this.hotels, 0, 4, 0, 7);
+        this.setComboHotels(c);
 	    
 	  	//button for departure date, date picker 
         this.textDeparture = this.addTextField(c,20,this.getDate(),0,2,0,4);
@@ -85,7 +71,7 @@ public class OneClickTripPanel extends basicPanel{
         //String dateReturn = this.getReturnDate();
         String fromAirport = (String) this.getComboFrom().getSelectedItem();
         String toAirport = (String) this.getComboTo().getSelectedItem();
-        String hotel = (String) this.comboHotels.getSelectedItem();
+        String hotel = (String) this.getComboHotels().getSelectedItem();
         int numberPeople = Integer.parseInt(this.getNumberPeople());
         String result = "";
         if(!validateDates(dateDeparture,dateReturn))
