@@ -34,6 +34,7 @@ public abstract class BasicPanel extends JPanel {
 	String[] itemsToIceland = new String[]{"Specify area in Iceland", "Keflavik", "Akureyri"};
 	String defaultString = itemsToIceland[0];
 	String[] itemsFrom = new String[]{"select departure airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
+	String[] itemsTo = new String[]{"select arrival airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
 	String[] itemsBudget = new String[]{"choose budget", "€1000", "€2000"};
     String[] hotels = new String[] {"Hotel 1", "Hotel 2", "Hotel 3"};
 	Controller controller = new Controller();
@@ -139,6 +140,9 @@ public abstract class BasicPanel extends JPanel {
 
 	public String[] getItemsFrom() {
 		return this.itemsFrom;
+	}
+	public String[] getItemsTo() {
+		return this.itemsTo;
 	}
 	public String getDepartureDate() {
 		return this.textDeparture.getText();

@@ -39,7 +39,7 @@ public class StopoverTripPanel extends BasicPanel {
 	    this.setComboFrom(c, this.getItemsFrom());
 	    
 	    //DropDown menu for arrival addText
-		this.setComboTo(c, this.getItemsToIceland());
+		this.setComboTo(c, this.getItemsTo());
 	    
 	        
 	 	//button for departure date, date picker 
