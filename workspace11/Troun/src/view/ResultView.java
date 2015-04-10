@@ -17,7 +17,7 @@ import javax.swing.JList;
 import javax.swing.JTextField;
 
 
-public class ResultView extends basicPanel {
+public class ResultView extends BasicPanel {
 	JList[] lists;
 	public ResultView(Hotel[] hotels, Flight[][] flights) {
 		this.setPreferredSize(new Dimension(1000, 500));

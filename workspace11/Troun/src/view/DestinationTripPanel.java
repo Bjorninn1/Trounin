@@ -20,7 +20,7 @@ import javax.swing.JTextField;
 //import Model.Trips;
 
 
-public class DestinationTripPanel extends basicPanel{
+public class DestinationTripPanel extends BasicPanel{
 	
 	private static final long serialVersionUID = 1L;
 	//instance variables for panel1: 

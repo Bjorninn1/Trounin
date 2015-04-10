@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 
 
-public class StopoverTripPanel extends basicPanel {
+public class StopoverTripPanel extends BasicPanel {
 	
 	private static final long serialVersionUID = 1L;
 	//instance variables for panel2:

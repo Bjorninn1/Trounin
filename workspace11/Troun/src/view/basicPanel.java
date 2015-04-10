@@ -39,7 +39,7 @@ public abstract class basicPanel extends JPanel {
 	Controller controller = new Controller();
 
 	String mainAirport = "Keflavik";
-	public basicPanel() {
+	public BasicPanel() {
 		this.setPreferredSize(new Dimension(1000, 500));
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();

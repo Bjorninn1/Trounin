@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class OneClickTripPanel extends basicPanel{
+public class OneClickTripPanel extends BasicPanel{
 		
 	private static final long serialVersionUID = 1L;
 	    
