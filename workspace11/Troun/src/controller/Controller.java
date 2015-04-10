@@ -56,7 +56,20 @@ public class Controller {
         }
         return flights;
     }
+    // Pre: the input should be the date that you want to update
+    // Post: output is a new string with a the day before
+    public String getDateBefore(String date) {
+        //does not account for reducing a month
+        return date.substring(0,8) + (Integer.parseInt(date.substring(8))-1);
+    }    
+    // Pre: the input should be the date that you want to update
+    // Post: output is a new string with a the day after
+    public String getDateAfter(String date) {
+        //does not account for reducing a month
+        return date.substring(0,8) + (Integer.parseInt(date.substring(8))+1);
+    }
     private String alterDate(String date) {
+        getDateBefore(date);
         return date;
     }
     private int raiseBudget(int budget) {
