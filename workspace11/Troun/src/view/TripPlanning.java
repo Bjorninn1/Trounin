@@ -38,15 +38,15 @@ public class TripPlanning extends JPanel {
         //tab4 = new ResultView();
         
         tabbedPane.addTab("Destination trip", null, tab1,
-                "Does nothing");
+                "DestinationTrip");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
         
         tabbedPane.addTab("Stopover trip", null, tab2,
-                "Does twice as much nothing");
+                "Stop-over Trip");
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
         
         tabbedPane.addTab("One-click flight+hotel", null, tab3,
-                "Still does nothing");
+                "One-click flight+hotel");
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
 
         //Add the tabbed pane to this panel.
@@ -66,8 +66,6 @@ public class TripPlanning extends JPanel {
         tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
         tabbedPane.setSelectedIndex(3);
     }
-     
-     
     /**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from

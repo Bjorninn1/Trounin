@@ -85,6 +85,17 @@ public abstract class BasicPanel extends JPanel {
         this.add(tf, c);
         return tf;
 	}
+	public JTextField addUneditableTextField(GridBagConstraints c, int size, String defaultValue, double weightX, int gridwidth, int gridX, int gridY) {
+		JTextField tf = new JTextField(size);
+		c.gridwidth = gridwidth;
+		tf.setText(defaultValue);
+	    c.weightx = weightX;
+	    c.gridx = (int)gridX;
+	    c.gridy = (int)gridY;
+	    this.add(tf, c);
+	    tf.setEditable(false);
+	    return tf;
+	}
 	public JList addJList(GridBagConstraints c, String[] data, int gridWidth, int gridHeight, int gridX, int gridY) {
 		JList list = new JList(data);
 		//list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -154,14 +165,12 @@ public abstract class BasicPanel extends JPanel {
 		return this.searchButton;
 	}
 	public void departureDateAction(ActionEvent ae) {
-		// TODO Auto-generated method stub
 	    this.textDeparture.setEditable(true);
 		this.textDeparture.setText(new DatePicker(this).setPickedDate());
 	    this.textDeparture.setEditable(false);
 	}
 	
 	public void returnDateAction(ActionEvent ae) {
-		// TODO Auto-generated method stub
 		this.textReturn.setEditable(true);
 		this.textReturn.setText(new DatePicker(this).setPickedDate());
 		this.textReturn.setEditable(false);
@@ -217,13 +226,9 @@ public abstract class BasicPanel extends JPanel {
 	    });
 	}
     public Flight[] searchFlight(String date, String fromAirport, String toAirport, int numberPeople, int budget) {
-    	//DestinationTripController controller = new DestinationTripController();
-		//return controller.findTrips(date, fromAirport, toAirport, numberPeople);
 		return controller.searchFlight(date, fromAirport, toAirport, numberPeople, budget); 
     }
     public Hotel[] searchHotel(String date, String location, int numberPeople, int budget) {
-    	//DestinationTripController controller = new DestinationTripController();
-		//return controller.findHotels(date, location, numberPeople);
 		return controller.searchHotel(date, location, numberPeople, budget);
     }
     public Hotel[] getHotel(String date, String location, String hotelName, int numberPeople, int budget) {

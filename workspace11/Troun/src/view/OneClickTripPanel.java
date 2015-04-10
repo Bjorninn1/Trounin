@@ -45,16 +45,14 @@ public class OneClickTripPanel extends BasicPanel{
         this.setComboHotels(c);
 	    
 	  	//button for departure date, date picker 
-        this.textDeparture = this.addTextField(c,20,this.getDate(),0,2,0,4);
-        this.textDeparture.setEditable(false);
+        this.textDeparture = this.addUneditableTextField(c,20,this.getDate(),0,2,0,4);
         this.departureDate = this.addButton(c,"Departure Date",0,2,0,3);
 
 	    
 	    
 	    //button for return date, date picker 
 	    this.returnDate = this.addButton(c,"Return Date",0,2,2,3);
-        this.textReturn = this.addTextField(c,20,this.getDate(),0,2,2,4);
-        this.textReturn.setEditable(false);
+        this.textReturn = this.addUneditableTextField(c,20,this.getDate(),0,2,2,4);
 	    
 	    this.addLabel(c,"Nr. People",0,1,0,5);
         this.setTFnumPeople(c, 10);
