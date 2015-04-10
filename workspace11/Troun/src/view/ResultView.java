@@ -18,7 +18,8 @@ import javax.swing.JTextField;
 
 
 public class ResultView extends BasicPanel {
-	JList[] lists;
+	private static final long serialVersionUID = 1L;
+	JList<String>[] lists;
 	public ResultView(Hotel[] hotels, Flight[][] flights) {
 		this.setPreferredSize(new Dimension(1000, 500));
         this.setLayout(new GridBagLayout());

@@ -53,25 +53,25 @@ public abstract class BasicPanel extends JPanel {
 		JButton button = new JButton(text);
 		c.gridwidth = (int) gridwidth;
         c.weightx = weightX;
-        c.gridx = (int)gridX;
-        c.gridy = (int)gridY;
+        c.gridx = gridX;
+        c.gridy = gridY;
         this.add(button, c);
         return button;
 	}
-	public void addLabel(GridBagConstraints c, String text, double weightX, double gridwidth, double gridX, double gridY) {
+	public void addLabel(GridBagConstraints c, String text, double weightX, double gridwidth, int gridX, int gridY) {
 		JLabel label = new JLabel(text);
 		c.gridwidth = (int)gridwidth;
         c.weightx = weightX;
-        c.gridx = (int)gridX;
-        c.gridy = (int)gridY;
+        c.gridx = gridX;
+        c.gridy = gridY;
         this.add(label, c);
 	}
-	public JComboBox addComboBox(GridBagConstraints c, String[] text, double weightX, double gridWidth, double gridX, double gridY) {
-		JComboBox comboBox = new JComboBox(text);
+	public JComboBox<String> addComboBox(GridBagConstraints c, String[] text, double weightX, double gridWidth, int gridX, int gridY) {
+		JComboBox<String> comboBox = new JComboBox<String>(text);
         c.weightx = weightX;
         c.gridwidth = (int)gridWidth;
-        c.gridx = (int)gridX;
-        c.gridy = (int)gridY;
+        c.gridx = gridX;
+        c.gridy = gridY;
         this.add(comboBox, c);
         return comboBox;
 	}
@@ -80,8 +80,8 @@ public abstract class BasicPanel extends JPanel {
 		c.gridwidth = gridwidth;
 		tf.setText(defaultValue);
         c.weightx = weightX;
-        c.gridx = (int)gridX;
-        c.gridy = (int)gridY;
+        c.gridx = gridX;
+        c.gridy = gridY;
         this.add(tf, c);
         return tf;
 	}
@@ -90,14 +90,14 @@ public abstract class BasicPanel extends JPanel {
 		c.gridwidth = gridwidth;
 		tf.setText(defaultValue);
 	    c.weightx = weightX;
-	    c.gridx = (int)gridX;
-	    c.gridy = (int)gridY;
+	    c.gridx = gridX;
+	    c.gridy = gridY;
 	    this.add(tf, c);
 	    tf.setEditable(false);
 	    return tf;
 	}
-	public JList addJList(GridBagConstraints c, String[] data, int gridWidth, int gridHeight, int gridX, int gridY) {
-		JList list = new JList(data);
+	public JList<String> addJList(GridBagConstraints c, String[] data, int gridWidth, int gridHeight, int gridX, int gridY) {
+		JList<String> list = new JList<String>(data);
 		//list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		c.gridwidth = gridWidth;
 		c.gridheight = gridHeight;
@@ -106,22 +106,22 @@ public abstract class BasicPanel extends JPanel {
         this.add(list, c);
         return list;
 	}
-	public JComboBox getComboFrom() {
+	public JComboBox<String> getComboFrom() {
 		return this.comboFrom;
 	}
 	public void setComboFrom(GridBagConstraints c, String[] fromLoc) {
 		this.comboFrom = this.addComboBox(c,fromLoc,0,2,0,1);	
 	}
-	public JComboBox getComboTo() {
+	public JComboBox<String> getComboTo() {
 		return this.comboTo;
 	}
 	public void setComboTo(GridBagConstraints c, String[] toLoc) {
 		this.comboTo = this.addComboBox(c,toLoc,0,2,2,1);	
 	}
-	public JComboBox getComboBudget() {
+	public JComboBox<String> getComboBudget() {
 		return this.comboBudget;
 	}
-	public JComboBox getComboHotels() {
+	public JComboBox<String> getComboHotels() {
 		return this.comboHotels;
 	}
 	public void setComboHotels(GridBagConstraints c) {
@@ -153,7 +153,7 @@ public abstract class BasicPanel extends JPanel {
 		return this.itemsBudget;
 	}
 	public String getDate() {
-		return this.today;
+		return this.today;	
 	}
 	public JButton getDepartureDateButton() {
 		return this.departureDate;
