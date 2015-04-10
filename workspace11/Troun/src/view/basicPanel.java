@@ -3,12 +3,15 @@ import model.*;
 import controller.*;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -46,6 +49,7 @@ public abstract class BasicPanel extends JPanel {
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(5,5,5,5);
+        this.setBackground(Color.CYAN);
         this.init(c);
 	}
 	abstract void init(GridBagConstraints c);

@@ -78,7 +78,7 @@ public class TripPlanning extends JPanel {
          
         //Add content to the window.
         frame.add(tripPlanning, BorderLayout.CENTER);
-         
+       
         //Display the window.
         frame.pack();
         frame.setVisible(true);
@@ -87,6 +87,13 @@ public class TripPlanning extends JPanel {
     public static void main(String[] args) {
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
+        /*try {
+            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+                | UnsupportedLookAndFeelException e1) {
+            e1.printStackTrace();
+        }*/
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 //Turn off metal's use of bold fonts
