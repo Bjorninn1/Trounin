@@ -96,7 +96,5 @@ public class OneClickTripPanel extends BasicPanel{
             flights = new Flight[][] {flights1, flights2, flights3, flights4};
         }
         TripPlanning.tripPlanning.showResultsView(hotels, flights);
-        //eftir að búið er að leita, er hægt að athuga hvort nógu mikið fannst, 
-        //og kalla aftur á sama fall með öðrum dagsetningum til að reyna að finna fleiri
 	}	
 }
