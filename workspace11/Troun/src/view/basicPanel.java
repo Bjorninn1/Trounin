@@ -18,7 +18,7 @@ import java.awt.Dimension;
 import java.awt.GridBagLayout;
 
 
-public abstract class basicPanel extends JPanel {
+public abstract class BasicPanel extends JPanel {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	JTextField textDeparture;
 	JTextField textReturn;
