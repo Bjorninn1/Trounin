@@ -40,10 +40,10 @@ public class ResultView extends BasicPanel {
 			options[i+1] = parseFlightInfo(flights[i]);
 		}
 		for(int i = 0; i < options.length; i++) {
-			this.addLabel(c, options.length == 5 ? labels[i] : (i < 2 ? labels[i] : labels[labels.length-1]), 0, 1, i, 0);
-			this.lists[i] = this.addJList(c, options[i], 1, options[i].length, i, 1);
+			this.addLabel(c, options.length == 5 ? labels[i] : (i < 2 ? labels[i] : labels[labels.length-1]), 0, 1, i%3, i/3+(i<3 ? 0 : options[i%3].length+1));
+			this.lists[i] = this.addJList(c, options[i], 1, options[i].length, i%3, 1+i/3+(i<3 ? 0 : (options[i%3].length+10)));
 		}
-		this.searchButton = this.addButton(c,"Book",0,1,options.length-1,11);
+		this.searchButton = this.addButton(c,"Book",0,1,options.length == 5 ? 2 : 3, 5/3+options[5%3].length+1);
 		this.addActionSearchButton();
 	}
 	public String[] parseHotelInfo(Hotel[] hotels) {

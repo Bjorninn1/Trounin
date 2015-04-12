@@ -69,7 +69,7 @@ public class FlightSearch {
     //Pre: flight is the flight you want to book, and numOfPassengers the number of travelers
     //Post: returns true if there was availability in the flight, false otherwise
     public boolean bookFlight(Flight flight, int numberOfPassengers) {
-        if(numberOfPassengers <= flight.getCapacity()) {
+        if(numberOfPassengers <= flight.getAvailableSeats()) {
             return true;
         }
         else 
