@@ -58,13 +58,13 @@ public class TripPlanning extends JPanel {
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         
     }//constructor endar hér
-    public void showResultsView(Hotel[] hotels, Flight[][] flights) {
+    public void showResultsView(Hotel[] hotels, Flight[][] flights, String dateDeparture, String dateReturn) {
         if(this.resultsShown)
             tabbedPane.remove(3);
         else
             this.resultsShown = !this.resultsShown;
         //tabbedPane.setEnabledAt(3, true);
-        tabbedPane.insertTab("Results", null, new ResultView(hotels, flights), "Search Results",3);
+        tabbedPane.insertTab("Results", null, new ResultView(hotels, flights, dateDeparture, dateReturn), "Search Results",3);
         tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
         tabbedPane.setSelectedIndex(3);
     }

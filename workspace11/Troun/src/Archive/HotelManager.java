@@ -11,14 +11,14 @@ public class HotelManager {
 		{
 			Connection c = null;
 			Statement stmt = null;
+			ResultSet hotelCount;
 			try{
 				Class.forName("org.sqlite.JDBC");
 				c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 				stmt = c.createStatement();
 				
-				ResultSet hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS;");
+				hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS;");
 				int count = hotelCount.getInt(1);
-				hotelCount.close();
 				
 				Hotel[] hotels = new Hotel[count];
 				for(int i = 1; i <= count; i++)
@@ -28,12 +28,15 @@ public class HotelManager {
 								h.getString("location"),h.getInt("roomcount"), h.getString("address"));
 				}
 				
-				stmt.close();
-				c.close();
+				
 				return hotels;
 			}catch(Exception e){
 				System.out.println(e.getMessage());
 				return new Hotel[0];
+			}finally {
+				stmt.close();
+				hotelCount.close();
+				c.close();
 			}
 		}
 		
@@ -41,13 +44,14 @@ public class HotelManager {
 		{
 			Connection c = null;
 	    	Statement stmt = null;
+	    	ResultSet hotelCount;
 	  
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
 	    		c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 	    		stmt = c.createStatement();
 
-	    		ResultSet hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS;");
+	    		hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS;");
 	    		int count = hotelCount.getInt(1);
 	    		int[] possIds = new int[count];
 	    		int counter = 0;
@@ -77,25 +81,30 @@ public class HotelManager {
 	    					h.getInt("roomcount"), h.getString("address"));
 	    		}
 	    		
-	    		stmt.close();
-	    		c.close();
+	    		//stmt.close();
+	    		//c.close();
 	    		return hotels;
 	    	} catch ( Exception e ) {
 	    			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	    			return new Hotel[0];
-	    		}	
+    		}finally {
+				stmt.close();
+				hotelCount.close();
+				c.close();
+			}
 		}
 		
 		public Hotel[] findHotels(DateRange dates, String name){
 	    	Connection c = null;
 	    	Statement stmt = null;
+	    	ResultSet hotelCount;
 	  
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
 	    		c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 	    		stmt = c.createStatement();
 	    		
-	    		ResultSet hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS");
+	    		hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS");
 	    		int count = hotelCount.getInt(1);
 	    		int[] nameMatches = new int[count];
 	    		int counter = 0;
@@ -139,25 +148,30 @@ public class HotelManager {
 	    					h.getInt("roomcount"), h.getString("address"));
 	    		}
 	    		
-	    		stmt.close();
-	    		c.close();
+	    		//stmt.close();
+	    		//c.close();
 	    		return hotels;
-	    		} catch ( Exception e ) {
-	    			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	    			return new Hotel[0];
-	    		}
+    		} catch ( Exception e ) {
+    			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+    			return new Hotel[0];
+    		}finally {
+				stmt.close();
+				hotelCount.close();
+				c.close();
+    		}
 		}
 		
 		public Hotel[] findHotels(DateRange dates, HotelCriteria cri){
 	    	Connection c = null;
 	    	Statement stmt = null;
+	    	ResultSet hotelCount;
 	    
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
 	    		c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 	    		stmt = c.createStatement();
 	    		
-	    		ResultSet hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS;");
+	    		hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS;");
 	    		int count = hotelCount.getInt(1);
 	    		int[] criMatches = new int[count];
 	    		int counter = 0;
@@ -201,25 +215,30 @@ public class HotelManager {
 	    					h.getInt("roomcount"), h.getString("address"));
 	    		}
 	    		
-	    		stmt.close(); 
-	    		c.close();
+	    		//stmt.close(); 
+	    		//c.close();
 	    		return hotels;
-	    		} catch ( Exception e ) {
-	    			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	    			return new Hotel[0];
-	    		}
+    		} catch ( Exception e ) {
+    			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+    			return new Hotel[0];
+    		}finally {
+    			stmt.close();
+				hotelCount.close();
+				c.close();
+    		}
 		}
 		
 		public Hotel[] findHotels(DateRange dates, int budget, int persons, String loc){
 	    	Connection c = null;
 	    	Statement stmt = null;
+	    	ResultSet hotelCount;
 	    
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
 	    		c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 	    		stmt = c.createStatement();
+	    		hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS;");
 	    		
-	    		ResultSet hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS;");
 	    		int count = hotelCount.getInt(1);
 	    		int[] locMatches = new int[count];
 	    		int counter = 0;
@@ -264,13 +283,17 @@ public class HotelManager {
 	    					h.getInt("roomcount"), h.getString("address"));
 	    		}
 	    		
-	    		stmt.close(); 
-	    		c.close();
+	    		//stmt.close(); 
+	    		//c.close();
 	    		return hotels;
-	    		} catch ( Exception e ) {
-	    			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	    			return new Hotel[0];
-	    		}
+    		} catch ( Exception e ) {
+    			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+    			return new Hotel[0];
+    		}finally {
+    			stmt.close();
+				hotelCount.close();
+				c.close();
+    		}
 		}
 		
 		public static void main(String[] args)

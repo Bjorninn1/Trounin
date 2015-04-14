@@ -110,17 +110,18 @@ public class Hotel {
 		}
 	}
 	
-	public boolean bookHotelRoom(DateRange dates, HotelRoom room){
-		 int roomId = room.getRoomId();
-	     Connection c = null;
-	     Statement stmt = null;
+	public boolean bookHotelRoom(DateRange dates, HotelRoom room) {
+		int roomId = room.getRoomId();
+	    Connection c = null;
+	    Statement stmt = null;
+	    ResultSet count = null;
 	    try {
 	    	Class.forName("org.sqlite.JDBC");
 	    	c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 	
 	    	stmt = c.createStatement();
 	    		
-	    	ResultSet count = stmt.executeQuery("SELECT Count(*) FROM Availability WHERE rId="+roomId+" AND hId="+this.id+" AND "+
+	    	count = stmt.executeQuery("SELECT Count(*) FROM Availability WHERE rId="+roomId+" AND hId="+this.id+" AND "+
 	      						dates.getFirstDate()+"<=date AND date<="+dates.getLastDate()+" AND avail=0;");
 	    	int countUnavail = count.getInt(1);
 	    	if(countUnavail > 0) return false;
@@ -129,15 +130,31 @@ public class Hotel {
 	    				" AND hId="+this.id+" AND "+dates.getFirstDate()+"<= date AND date<="+dates.getLastDate()+";";
 	    	stmt.executeUpdate(sql);
 	    		
-	    	stmt.close();
-	    	c.close();
+	    	
 	       
 	    	return true;
-	        } catch ( Exception e ) {
-	          	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	          	 return false;
-	        }   
-	  }
+        } catch ( SQLException e ) {
+          	System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          	 return false;
+        }catch(ClassNotFoundException e)
+		{
+			System.out.print(e.getMessage());
+			return false;
+		}
+        finally{
+        	try {
+                if (c != null) {
+                    //con.close();
+		        	stmt.close();
+			    	c.close();
+			    	count.close();
+                }
+            } catch (SQLException ignored) {
+            	ignored.printStackTrace();
+            }
+	    }
+
+	}
 	
 	public boolean submitComment(String comment, int userId)
 	{
@@ -211,6 +228,7 @@ public class Hotel {
 			System.out.print(e.getMessage());
 			return false;
 		}
+
 	}
 	
 	public Comment[] loadComments(int hotelId)

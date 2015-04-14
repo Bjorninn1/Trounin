@@ -97,6 +97,6 @@ public class OneClickTripPanel extends BasicPanel{
             Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, fromAirport, numberPeople, 300);   
             flights = new Flight[][] {flights1, flights2, flights3, flights4};
         }
-        TripPlanning.tripPlanning.showResultsView(hotels, flights);
+        TripPlanning.tripPlanning.showResultsView(hotels, flights, dateDeparture, dateReturn);
 	}	
 }

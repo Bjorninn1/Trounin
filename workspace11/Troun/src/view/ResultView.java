@@ -21,10 +21,16 @@ import javax.swing.JTextField;
 
 public class ResultView extends BasicPanel {
 	private static final long serialVersionUID = 1L;
+	DateRange dateRange;
 	JList<String>[] lists;
-	public ResultView(Hotel[] hotels, Flight[][] flights) {
+	Hotel[] hotels;
+	Flight[][] flights;
+	public ResultView(Hotel[] hotels, Flight[][] flights, String dateDeparture, String dateReturn) {
 		this.setPreferredSize(new Dimension(1000, 500));
         this.setLayout(new GridBagLayout());
+        this.dateRange = new DateRange(Integer.parseInt(dateDeparture.substring(8)),Integer.parseInt(dateDeparture.substring(5,7)),Integer.parseInt(dateDeparture.substring(0,4)),Integer.parseInt(dateReturn.substring(8)),Integer.parseInt(dateReturn.substring(5,7)),Integer.parseInt(dateReturn.substring(0,4)));
+        this.hotels = hotels;
+        this.flights = flights;
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(5,5,5,5);
@@ -93,8 +99,18 @@ public class ResultView extends BasicPanel {
 			}
 			System.out.println("Booking: " + selected[i]);
 		}
-		if(valid)
-			System.out.println("booked successfully");
+
+		if(valid){
+			valid = false;
+			HotelRoom[] rooms = this.hotels[0].getRooms();
+			for(int i = 0; i < rooms.length && !valid ; i++) {
+				valid = this.hotels[0].bookHotelRoom(this.dateRange, rooms[i]);
+			}
+			if(valid)
+				System.out.println("booked successfully");
+			else
+				System.out.println("options not available anymore");
+		}
 		else
 			System.out.println("Please Fill out all Options");
 	}
