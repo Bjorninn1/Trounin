@@ -1,5 +1,7 @@
 package view;
-import model.*;
+import model.FlightSearch;
+import model.Flight;
+import Archive.*;
 import controller.*;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

@@ -1,5 +1,7 @@
 package view;
-import model.*;
+import model.FlightSearch;
+import model.Flight;
+import Archive.*;
 import controller.*;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -34,7 +36,7 @@ public abstract class BasicPanel extends JPanel {
 	private JComboBox<String> comboHotels;
 	JComboBox<String> comboBudget;
 	String today = sdf.format(new Date()).toString();
-	String[] itemsToIceland = new String[]{"Specify area in Iceland", "Keflavik", "Akureyri"};
+	String[] itemsToIceland = new String[]{"Specify area in Iceland", "Reykjavik", "Akureyri"};
 	String defaultString = itemsToIceland[0];
 	String[] itemsFrom = new String[]{"select departure airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
 	String[] itemsTo = new String[]{"select arrival airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
@@ -42,7 +44,7 @@ public abstract class BasicPanel extends JPanel {
     String[] hotels = new String[] {"Hotel 1", "Hotel 2", "Hotel 3"};
 	Controller controller = new Controller();
 
-	String mainAirport = "Keflavik";
+	String mainAirport = "Reykjavik";
 	public BasicPanel() {
 		this.setPreferredSize(new Dimension(1000, 500));
         this.setLayout(new GridBagLayout());

@@ -1,5 +1,7 @@
 package view;
-import model.*;
+import model.FlightSearch;
+import model.Flight;
+import Archive.*;
 import controller.*;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -41,7 +43,7 @@ public class ResultView extends BasicPanel {
 		}
 		for(int i = 0; i < options.length; i++) {
 			this.addLabel(c, options.length == 5 ? labels[i] : (i < 2 ? labels[i] : labels[labels.length-1]), 0, 1, i%3, i/3+(i<3 ? 0 : options[i%3].length+1));
-			this.lists[i] = this.addJList(c, options[i], 1, options[i].length, i%3, 1+i/3+(i<3 ? 0 : (options[i%3].length+10)));
+			this.lists[i] = this.addJList(c, options[i], 1, options[i].length, i%3, 5+i/3+(i<3 ? 0 : (options[i%3].length+10)));
 		}
 		this.searchButton = this.addButton(c,"Book",0,1,options.length == 5 ? 2 : 3, 5/3+options[5%3].length+1);
 		this.addActionSearchButton();
@@ -49,10 +51,16 @@ public class ResultView extends BasicPanel {
 	public String[] parseHotelInfo(Hotel[] hotels) {
 		String[] results = new String[hotels.length];
 		for(int i = 0; i < hotels.length; i++) {
+			int minHotelPrice = Integer.MAX_VALUE;
+			int maxHotelPrice = Integer.MIN_VALUE;
+			HotelRoom[] rooms = hotels[i].getRooms();
+			for (int j = 0; j < rooms.length; j++) {
+				minHotelPrice = rooms[j].getNightPrice() < minHotelPrice ? rooms[j].getNightPrice() : minHotelPrice;
+				maxHotelPrice = rooms[j].getNightPrice() > maxHotelPrice ? rooms[j].getNightPrice() : maxHotelPrice;
+			}
 			results[i] = hotels[i].getName();
 			results[i] += " " + hotels[i].getLocation();
-			results[i] += " from: " + hotels[i].getMinPrice();
-			results[i] += " to: " + hotels[i].getMaxPrice();
+			results[i] += " from: " +minHotelPrice +" to: " +maxHotelPrice;
 		}
 		return results;
 	}

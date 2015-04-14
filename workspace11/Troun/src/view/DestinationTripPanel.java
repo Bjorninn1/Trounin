@@ -1,5 +1,7 @@
 package view;
-import model.*;
+import model.FlightSearch;
+import model.Flight;
+import Archive.*;
 import controller.*;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -82,16 +84,16 @@ public class DestinationTripPanel extends BasicPanel{
         Flight[][] flights;
         Hotel[] hotels;
         if(toAirport.equals(this.mainAirport)) {
-            Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, toAirport, numberPeople, 300);
-            hotels = this.searchHotel(dateDeparture,toAirport, numberPeople, 300);
-            Flight[] flights2 = this.searchFlight(dateReturn, toAirport, fromAirport, numberPeople, 300);
+            Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, toAirport, numberPeople, 300000000);
+            hotels = this.searchHotel(dateDeparture,toAirport, numberPeople, 300000000);
+            Flight[] flights2 = this.searchFlight(dateReturn, toAirport, fromAirport, numberPeople, 300000000);
             flights = new Flight[][] {flights1, flights2};
         }else{
-            Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
-            Flight[] flights2 = this.searchFlight(dateDeparture, this.mainAirport, toAirport, numberPeople, 300);
-            hotels = this.searchHotel(dateDeparture, toAirport, numberPeople, 300);
-            Flight[] flights3 = this.searchFlight(dateReturn, toAirport, this.mainAirport, numberPeople, 300); 
-            Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, fromAirport, numberPeople, 300);   
+            Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300000000);
+            Flight[] flights2 = this.searchFlight(dateDeparture, this.mainAirport, toAirport, numberPeople, 300000000);
+            hotels = this.searchHotel(dateDeparture, toAirport, numberPeople, 300000000);
+            Flight[] flights3 = this.searchFlight(dateReturn, toAirport, this.mainAirport, numberPeople, 300000000); 
+            Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, fromAirport, numberPeople, 300000000);   
             flights = new Flight[][] {flights1 , flights2, flights3, flights4};
         }
         TripPlanning.tripPlanning.showResultsView(hotels, flights);

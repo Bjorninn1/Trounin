@@ -1,5 +1,7 @@
 package controller;
-import model.*;
+import model.FlightSearch;
+import model.Flight;
+import Archive.*;
 public class Controller {
     HotelManager hotelManager = new HotelManager();
     FlightSearch flightManager = new FlightSearch();
@@ -15,8 +17,10 @@ public class Controller {
     //Use: contoller.searchHotel(date, location, numberPeople, budget)
     //Pre: controller is an initialised object of this class, inputs have to make sense
     //Post: retuns an array of Hotels matching the given criteria
+    //DateRange dates, int budget, int persons, String loc
     public Hotel[] searchHotel(String date, String location, int numberPeople, int budget) {
-        Hotel[] hotels = hotelManager.findHotels( budget, date, numberPeople, location);
+        DateRange dateR = new DateRange(Integer.parseInt(date.substring(8)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(0,4)),Integer.parseInt(date.substring(8)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(0,4)));
+        Hotel[] hotels = hotelManager.findHotels(dateR, budget, numberPeople, location);
         if(hotels.length == 0) hotels = this.reiterateSearchHotel(date, location, numberPeople, budget);
         return hotels;
     } 
@@ -24,26 +28,30 @@ public class Controller {
     //Use: controller.getHotel(date, location, hotelName, numberPeople, budget)
     //Pre: controller is an initialised object of this class, inputs have to make sense
     //Post: returns an array of availability for a given hotel
+    //DateRange dates, String name
     public Hotel[] getHotel(String date, String location, String hotelName, int numberPeople, int budget) {
-        Hotel[] hotels = hotelManager.getHotel(location, hotelName, numberPeople, date, budget);
+        DateRange dateR = new DateRange(Integer.parseInt(date.substring(8)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(0,4)),Integer.parseInt(date.substring(8)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(0,4)));
+        Hotel[] hotels = hotelManager.findHotels(dateR, hotelName);
         if(hotels.length == 0) hotels = this.reiterateGetHotel(date, location, hotelName, numberPeople, budget);
         return hotels;
     }
     private Hotel[] reiterateGetHotel(String date, String location, String hotelName, int numberPeople, int budget) {
         Hotel[] hotels = new Hotel[0];
+        DateRange dateR = new DateRange(Integer.parseInt(date.substring(8)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(0,4)),Integer.parseInt(date.substring(8)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(0,4)));
         for(int i = 0; i < 5 && hotels.length == 0; i++) {
             date = this.alterDate(date);
             budget = this.raiseBudget(budget);
-            hotels = hotelManager.getHotel(location, hotelName, numberPeople, date, budget);
+            hotels = hotelManager.findHotels(dateR, hotelName);
         }
         return hotels;
     }
     private Hotel[] reiterateSearchHotel(String date, String location, int numberPeople, int budget) {
         Hotel[] hotels = new Hotel[0];
+        DateRange dateR = new DateRange(Integer.parseInt(date.substring(8)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(0,4)),Integer.parseInt(date.substring(8)),Integer.parseInt(date.substring(5,7)),Integer.parseInt(date.substring(0,4)));
         for(int i = 0; i < 5 && hotels.length == 0; i++) {
             date = this.alterDate(date);
             budget = this.raiseBudget(budget);
-            hotels = hotelManager.findHotels( budget, date, numberPeople, location);
+            hotels = hotelManager.findHotels(dateR, budget, numberPeople, location);
         }
         return hotels;
     }
