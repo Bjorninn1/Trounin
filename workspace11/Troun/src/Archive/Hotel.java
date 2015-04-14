@@ -57,7 +57,7 @@ public class Hotel {
 		Statement stmt = null;
 		try{
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
 			stmt = conn.createStatement();
 			
 			int[] criMatches = new int[this.roomCount];
@@ -117,7 +117,7 @@ public class Hotel {
 	    ResultSet count = null;
 	    try {
 	    	Class.forName("org.sqlite.JDBC");
-	    	c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
+	    	c = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
 	
 	    	stmt = c.createStatement();
 	    		
@@ -162,7 +162,7 @@ public class Hotel {
 		Statement stmt = null;
 		try{
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
 			stmt = conn.createStatement();
 			
 			ResultSet count = stmt.executeQuery("SELECT COUNT(*) FROM Comments WHERE userId="+userId+" AND hotelId="+this.id+";");
@@ -201,7 +201,7 @@ public class Hotel {
 		Statement stmt = null;
 		try{
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
 			stmt = conn.createStatement();
 			
 			ResultSet count = stmt.executeQuery("SELECT COUNT(*) FROM Comments WHERE hotelId="+this.id+" AND UserId ="+userId+";");
@@ -237,7 +237,7 @@ public class Hotel {
 		Statement stmt = null;
 		try{
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
 		    stmt = conn.createStatement();
 			
 			ResultSet count = stmt.executeQuery("select COUNT(*) from Comments where HotelId ="+hotelId+";");
@@ -277,7 +277,7 @@ public class Hotel {
 		Statement stmt = null;
 		try{
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
 			stmt = conn.createStatement();
 			
 			ResultSet count = stmt.executeQuery("select COUNT(*) from Rooms where hId ="+hotelId+";");
