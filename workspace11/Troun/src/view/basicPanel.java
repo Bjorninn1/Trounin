@@ -57,6 +57,7 @@ public abstract class BasicPanel extends JPanel {
 	//AK
 
 	String mainAirport = "KEF";
+	String mainCityAirport = "RVK";
 	public BasicPanel() {
 		this.setPreferredSize(new Dimension(1000, 500));
         this.setLayout(new GridBagLayout());
