@@ -278,11 +278,12 @@ public class Hotel {
 		Statement stmt = null;
 		try{
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 			stmt = conn.createStatement();
 			
 			ResultSet count = stmt.executeQuery("select COUNT(*) from Rooms where hId ="+hotelId+";");
 			HotelRoom[] rs = new HotelRoom[count.getInt(1)];
+			count.close();
 			
 			ResultSet rooms = stmt.executeQuery("select * from Rooms where hId ="+ hotelId+";");
 

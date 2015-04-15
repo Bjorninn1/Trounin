@@ -1,18 +1,22 @@
 package controller;
-import model.FlightSearch;
-import model.Flight;
+//import model.FlightSearch;
+//import model.Flight;
+import flightsearch.*;
 import Archive.*;
+import java.util.ArrayList;
 public class Controller {
     HotelManager hotelManager = new HotelManager();
-    FlightSearch flightManager = new FlightSearch();
+    FindFlights flightManager = new FindFlights();
     //Use: contoller.searchFlight(date, fromAirport, toAirport, numberPeople, budget)
     //Pre: controller is an initialised object of this class, inputs have to make sense
     //Post: returns an array of flights that match the criteria
     public Flight[] searchFlight(String date, String fromAirport, String toAirport, int numberPeople, int budget) {
-        Flight[] flights = flightManager.findRightFlight(date, fromAirport, toAirport, budget, numberPeople);
-        if(flights.length == 0) flights = this.reiterateSearchFlight(date, fromAirport, toAirport, budget, numberPeople);
+        ArrayList<Flight> flightList = flightManager.dbflights(fromAirport, toAirport, date, numberPeople);
+        Flight[] flights = flightList.toArray(new Flight[flightList.size()]);
+        if(flights.length == 0) flights = this.reiterateSearchFlight(date, fromAirport, toAirport, numberPeople, budget);
         return flights;
     }
+    //String fromAirport, String toAirport, String dateDeparture, int nrPassengers
 
     //Use: contoller.searchHotel(date, location, numberPeople, budget)
     //Pre: controller is an initialised object of this class, inputs have to make sense
@@ -58,12 +62,14 @@ public class Controller {
         return hotels;
     }
     private Flight[] reiterateSearchFlight(String date, String fromAirport, String toAirport, int numberPeople, int budget) {
+        ArrayList<Flight> flightList = new ArrayList<Flight>();
         Flight[] flights = new Flight[0];
         for(int i = 0; i < 5 && flights.length == 0; i++) {
             date = this.alterDate(date);
             date = this.alterDate(date);
             budget = this.raiseBudget(budget);
-            flights = flightManager.findRightFlight(date, fromAirport, toAirport, budget, numberPeople);
+            flightList = flightManager.dbflights(date, fromAirport, toAirport, numberPeople);
+            flights = flightList.toArray(new Flight[flightList.size()]);
         }
         return flights;
     }

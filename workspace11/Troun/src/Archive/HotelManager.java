@@ -259,7 +259,7 @@ public class HotelManager {
 	    
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
-	    		c = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
+	    		c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 	    		stmt = c.createStatement();
 	    		hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS;");
 	    		
@@ -316,10 +316,12 @@ public class HotelManager {
     		}finally {
     			try {
 	                if (c != null) {
-			        	stmt.close();
-						hotelCount.close();
 						c.close();
 	                } 
+	                if(hotelCount != null) 
+						hotelCount.close();
+					if(stmt != null)
+			        	stmt.close();
 	            } catch (SQLException e) {
 	            	e.printStackTrace();
 	            }
