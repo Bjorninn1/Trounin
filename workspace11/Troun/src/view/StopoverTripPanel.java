@@ -1,6 +1,7 @@
 package view;
-import model.FlightSearch;
-import model.Flight;
+//import model.FlightSearch;
+//import model.Flight;
+import flightsearch.*;
 import Archive.*;
 import controller.*;
 import java.awt.Dimension;
@@ -82,14 +83,15 @@ public class StopoverTripPanel extends BasicPanel {
 	public void parseInfo(String dateDeparture, String dateReturn) {
 		//String dateDeparture = this.getDepartureDate();
         //String dateReturn = this.getReturnDate();
-        String fromAirport = (String) this.getComboFrom().getSelectedItem();
-        String toAirport = (String) this.getComboTo().getSelectedItem();
-        String locationIceland = (String) this.comboIceland.getSelectedItem();
+        String fromAirport = this.getSelectedForeignAirport(this.getComboFrom().getSelectedIndex());
+        String toAirport = this.getSelectedForeignAirport(this.getComboTo().getSelectedIndex());
+        String airportIceland = this.getSelectedInlandAirport(this.comboIceland.getSelectedIndex());
+        String hotelLocation = (String) this.comboIceland.getSelectedItem();
         int numberPeople = Integer.parseInt(this.getNumberPeople());
         String result = "";
         if(!validateDates(dateDeparture,dateReturn))
             result += "Fix Dates \n";
-        if(fromAirport.equals(this.getItemsFrom()[0]) || toAirport.equals(this.itemsTo2[0]) || locationIceland.equals(this.getItemsToIceland()[0]))
+        if(fromAirport.equals(this.getItemsFrom()[0]) || toAirport.equals(this.itemsTo2[0]) || airportIceland.equals(this.getItemsToIceland()[0]))
             result += "Fix departure/return locations/location in Iceland";
         if(!result.equals("")) {
             this.infoBox(result,"Error");
@@ -97,16 +99,16 @@ public class StopoverTripPanel extends BasicPanel {
         }
         Flight[][] flights;
     	Hotel[] hotels;
-        if(locationIceland.equals(itemsIceland[1])) {
+        if(airportIceland.equals(itemsIceland[1])) {
             Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
-            hotels = this.searchHotel(dateDeparture, dateReturn, locationIceland, numberPeople, 300);
+            hotels = this.searchHotel(dateDeparture, dateReturn, hotelLocation, numberPeople, 300);
             Flight[] flights2 = this.searchFlight(dateReturn, this.mainAirport, toAirport, numberPeople, 300);
             flights = new Flight[][] {flights1, flights2};
         }else{
             Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
-            Flight[] flights2 = this.searchFlight(dateDeparture, this.mainAirport, locationIceland, numberPeople, 300);
-            hotels = this.searchHotel(dateDeparture, dateReturn, locationIceland, numberPeople, 300);
-            Flight[] flights3 = this.searchFlight(dateReturn, locationIceland, this.mainAirport, numberPeople, 300); 
+            Flight[] flights2 = this.searchFlight(dateDeparture, this.mainAirport, airportIceland, numberPeople, 300);
+            hotels = this.searchHotel(dateDeparture, dateReturn, hotelLocation, numberPeople, 300);
+            Flight[] flights3 = this.searchFlight(dateReturn, airportIceland, this.mainAirport, numberPeople, 300); 
             Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, toAirport, numberPeople, 300);   
             flights = new Flight[][] {flights1, flights2, flights3, flights4};
         }

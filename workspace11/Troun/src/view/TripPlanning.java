@@ -1,6 +1,7 @@
 package view;
-import model.FlightSearch;
-import model.Flight;
+//import model.FlightSearch;
+//import model.Flight;
+import flightsearch.*;
 import Archive.*;
 import javax.swing.JTabbedPane;
 import javax.swing.JPanel;

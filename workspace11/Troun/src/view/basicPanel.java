@@ -1,6 +1,7 @@
 package view;
-import model.FlightSearch;
-import model.Flight;
+//import model.FlightSearch;
+//import model.Flight;
+import flightsearch.*;
 import Archive.*;
 import controller.*;
 import java.awt.GridBagConstraints;
@@ -37,14 +38,25 @@ public abstract class BasicPanel extends JPanel {
 	JComboBox<String> comboBudget;
 	String today = sdf.format(new Date()).toString();
 	String[] itemsToIceland = new String[]{"Specify area in Iceland", "Reykjavik", "Akureyri"};
+	String[] inlandAirports = new String[]{null, "KEF", "AK"};
 	String defaultString = itemsToIceland[0];
-	String[] itemsFrom = new String[]{"select departure airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
-	String[] itemsTo = new String[]{"select arrival airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
+	//String[] itemsFrom = new String[]{"select departure airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
+	String[] itemsFrom = new String[]{"select departure airport", "London", "Copenhagen", "Boston", "China"};
+	String[] foreignAirports = new String[] {null, "LHR", "CPH", "BOS", "PEK"};
+	String[] itemsTo = new String[]{"select arrival airport", "London", "Copenhagen", "Boston", "China"};
+	//String[] itemsTo = new String[]{"select arrival airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
 	String[] itemsBudget = new String[]{"choose budget", "€1000", "€2000"};
     String[] hotels = new String[] {"Hotel 1", "Hotel 2", "Hotel 3"};
 	Controller controller = new Controller();
+	//KEF
+	//CPH
+	//RVK
+	//LHR
+	//BOS
+	//PEK
+	//AK
 
-	String mainAirport = "Reykjavik";
+	String mainAirport = "KEF";
 	public BasicPanel() {
 		this.setPreferredSize(new Dimension(1000, 500));
         this.setLayout(new GridBagLayout());
@@ -209,6 +221,12 @@ public abstract class BasicPanel extends JPanel {
     }
     public void validateInfo() {
 
+    }
+    public String getSelectedForeignAirport(int index) {
+    	return this.foreignAirports[index];
+    }
+    public String getSelectedInlandAirport(int index) {
+    	return this.inlandAirports[index];
     }
     public void inputActions() {
 		this.getDepartureDateButton().addActionListener(new ActionListener() {

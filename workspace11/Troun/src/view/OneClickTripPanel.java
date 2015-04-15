@@ -1,6 +1,7 @@
 package view;
-import model.FlightSearch;
-import model.Flight;
+//import model.FlightSearch;
+//import model.Flight;
+import flightsearch.*;
 import Archive.*;
 import controller.*;
 import java.awt.Dimension;
@@ -69,8 +70,8 @@ public class OneClickTripPanel extends BasicPanel{
 	public void parseInfo(String dateDeparture, String dateReturn) {
 		//String dateDeparture = this.getDepartureDate();
         //String dateReturn = this.getReturnDate();
-        String fromAirport = (String) this.getComboFrom().getSelectedItem();
-        String toAirport = (String) this.getComboTo().getSelectedItem();
+        String fromAirport = this.getSelectedForeignAirport(this.getComboFrom().getSelectedIndex());
+        String toAirport = this.getSelectedInlandAirport(this.getComboTo().getSelectedIndex());
         String hotel = (String) this.getComboHotels().getSelectedItem();
         int numberPeople = Integer.parseInt(this.getNumberPeople());
         String result = "";

@@ -1,6 +1,7 @@
 package view;
-import model.FlightSearch;
-import model.Flight;
+//import model.FlightSearch;
+//import model.Flight;
+import flightsearch.*;
 import Archive.*;
 import controller.*;
 import java.awt.Dimension;
@@ -60,7 +61,6 @@ public class ResultView extends BasicPanel {
 			int minHotelPrice = Integer.MAX_VALUE;
 			int maxHotelPrice = Integer.MIN_VALUE;
 			HotelRoom[] rooms = hotels[i].getRooms();
-			System.out.println(rooms.length);
 			for (int j = 0; j < rooms.length; j++) {
 				minHotelPrice = rooms[j].getNightPrice() < minHotelPrice ? rooms[j].getNightPrice() : minHotelPrice;
 				maxHotelPrice = rooms[j].getNightPrice() > maxHotelPrice ? rooms[j].getNightPrice() : maxHotelPrice;
@@ -75,7 +75,7 @@ public class ResultView extends BasicPanel {
 		String[] results = new String[flights.length];
 		for(int i = 0; i < flights.length; i++) {
 			results[i] = "" + flights[i].getFlightNumber();
-			results[i] += " " + flights[i].getDateTimeDeparture();
+			results[i] += " " + flights[i].getDateDeparture();
 			results[i] += " from: " + flights[i].getFromAirport();
 			results[i] += " to: " + flights[i].getToAirport();	
 			results[i] += " for: " + flights[i].getPrice();
