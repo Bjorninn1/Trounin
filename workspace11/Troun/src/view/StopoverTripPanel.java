@@ -99,13 +99,13 @@ public class StopoverTripPanel extends BasicPanel {
     	Hotel[] hotels;
         if(locationIceland.equals(itemsIceland[1])) {
             Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
-            hotels = this.searchHotel(dateDeparture, locationIceland, numberPeople, 300);
+            hotels = this.searchHotel(dateDeparture, dateReturn, locationIceland, numberPeople, 300);
             Flight[] flights2 = this.searchFlight(dateReturn, this.mainAirport, toAirport, numberPeople, 300);
             flights = new Flight[][] {flights1, flights2};
         }else{
             Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
             Flight[] flights2 = this.searchFlight(dateDeparture, this.mainAirport, locationIceland, numberPeople, 300);
-            hotels = this.searchHotel(dateDeparture,locationIceland, numberPeople, 300);
+            hotels = this.searchHotel(dateDeparture, dateReturn, locationIceland, numberPeople, 300);
             Flight[] flights3 = this.searchFlight(dateReturn, locationIceland, this.mainAirport, numberPeople, 300); 
             Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, toAirport, numberPeople, 300);   
             flights = new Flight[][] {flights1, flights2, flights3, flights4};

@@ -11,7 +11,7 @@ public class HotelManager {
 		{
 			Connection c = null;
 			Statement stmt = null;
-			ResultSet hotelCount;
+			ResultSet hotelCount = null;
 			try{
 				Class.forName("org.sqlite.JDBC");
 				c = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
@@ -34,9 +34,15 @@ public class HotelManager {
 				System.out.println(e.getMessage());
 				return new Hotel[0];
 			}finally {
-				stmt.close();
-				hotelCount.close();
-				c.close();
+				try {
+	                if (c != null) {
+			        	stmt.close();
+						hotelCount.close();
+						c.close();
+	                } 
+	            } catch (SQLException e) {
+	            	e.printStackTrace();
+	            }
 			}
 		}
 		
@@ -44,7 +50,7 @@ public class HotelManager {
 		{
 			Connection c = null;
 	    	Statement stmt = null;
-	    	ResultSet hotelCount;
+	    	ResultSet hotelCount = null;
 	  
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
@@ -88,16 +94,22 @@ public class HotelManager {
 	    			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 	    			return new Hotel[0];
     		}finally {
-				stmt.close();
-				hotelCount.close();
-				c.close();
+    			try {
+	                if (c != null) {
+			        	stmt.close();
+						hotelCount.close();
+						c.close();
+	                } 
+	            } catch (SQLException e) {
+	            	e.printStackTrace();
+	            }
 			}
 		}
 		
 		public Hotel[] findHotels(DateRange dates, String name){
 	    	Connection c = null;
 	    	Statement stmt = null;
-	    	ResultSet hotelCount;
+	    	ResultSet hotelCount = null;
 	  
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
@@ -155,16 +167,22 @@ public class HotelManager {
     			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
     			return new Hotel[0];
     		}finally {
-				stmt.close();
-				hotelCount.close();
-				c.close();
+				try {
+	                if (c != null) {
+			        	stmt.close();
+						hotelCount.close();
+						c.close();
+	                } 
+	            } catch (SQLException e) {
+	            	e.printStackTrace();
+	            }
     		}
 		}
 		
 		public Hotel[] findHotels(DateRange dates, HotelCriteria cri){
 	    	Connection c = null;
 	    	Statement stmt = null;
-	    	ResultSet hotelCount;
+	    	ResultSet hotelCount = null;
 	    
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
@@ -222,16 +240,22 @@ public class HotelManager {
     			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
     			return new Hotel[0];
     		}finally {
-    			stmt.close();
-				hotelCount.close();
-				c.close();
+    			try {
+	                if (c != null) {
+			        	stmt.close();
+						hotelCount.close();
+						c.close();
+	                } 
+	            } catch (SQLException e) {
+	            	e.printStackTrace();
+	            }
     		}
 		}
 		
 		public Hotel[] findHotels(DateRange dates, int budget, int persons, String loc){
 	    	Connection c = null;
 	    	Statement stmt = null;
-	    	ResultSet hotelCount;
+	    	ResultSet hotelCount = null;
 	    
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
@@ -290,9 +314,15 @@ public class HotelManager {
     			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
     			return new Hotel[0];
     		}finally {
-    			stmt.close();
-				hotelCount.close();
-				c.close();
+    			try {
+	                if (c != null) {
+			        	stmt.close();
+						hotelCount.close();
+						c.close();
+	                } 
+	            } catch (SQLException e) {
+	            	e.printStackTrace();
+	            }
     		}
 		}
 		

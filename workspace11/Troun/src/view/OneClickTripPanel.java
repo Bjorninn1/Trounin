@@ -86,13 +86,13 @@ public class OneClickTripPanel extends BasicPanel{
         Hotel[] hotels;
         if(toAirport.equals(this.mainAirport)) {
             Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, toAirport, numberPeople, 300);
-            hotels = this.getHotel(dateDeparture, toAirport, hotel, numberPeople, 300);
+            hotels = this.getHotel(dateDeparture, dateReturn, toAirport, hotel, numberPeople, 300);
             Flight[] flights2 = this.searchFlight(dateReturn, toAirport, fromAirport, numberPeople, 300);
             flights = new Flight[][] {flights1, flights2};
         }else{
             Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
             Flight[] flights2 = this.searchFlight(dateDeparture, this.mainAirport, toAirport, numberPeople, 300);
-            hotels = this.getHotel(dateDeparture, toAirport, hotel, numberPeople, 300);
+            hotels = this.getHotel(dateDeparture, dateReturn, toAirport, hotel, numberPeople, 300);
             Flight[] flights3 = this.searchFlight(dateReturn, toAirport, this.mainAirport, numberPeople, 300); 
             Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, fromAirport, numberPeople, 300);   
             flights = new Flight[][] {flights1, flights2, flights3, flights4};

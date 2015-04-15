@@ -207,6 +207,7 @@ public class Hotel {
 			ResultSet count = stmt.executeQuery("SELECT COUNT(*) FROM Comments WHERE hotelId="+this.id+" AND UserId ="+userId+";");
 			if(count.getInt(1) == 0)
 				return false;
+			count.close();
 			
 			String sql = "DELETE FROM Comments WHERE HotelId="+this.id +" AND UserId="+userId+";";
 			stmt.executeUpdate(sql);
@@ -313,6 +314,16 @@ public class Hotel {
 		{
 			System.out.println(e.getMessage());
 			return new HotelRoom[0];
+		}
+		finally {
+			try {
+				if(conn != null) {
+					conn.close();
+					stmt.close();
+				}
+			} catch (SQLException e) {
+            	e.printStackTrace();
+            }
 		}
 	}
 	

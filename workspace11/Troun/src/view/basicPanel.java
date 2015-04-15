@@ -238,11 +238,11 @@ public abstract class BasicPanel extends JPanel {
     public Flight[] searchFlight(String date, String fromAirport, String toAirport, int numberPeople, int budget) {
 		return controller.searchFlight(date, fromAirport, toAirport, numberPeople, budget); 
     }
-    public Hotel[] searchHotel(String date, String location, int numberPeople, int budget) {
-		return controller.searchHotel(date, location, numberPeople, budget);
+    public Hotel[] searchHotel(String dateFrom, String dateTo, String location, int numberPeople, int budget) {
+		return controller.searchHotel(dateFrom, dateTo, location, numberPeople, budget);
     }
-    public Hotel[] getHotel(String date, String location, String hotelName, int numberPeople, int budget) {
-    	return controller.getHotel( date, location, hotelName, numberPeople, budget);
+    public Hotel[] getHotel(String dateFrom, String dateTo, String location, String hotelName, int numberPeople, int budget) {
+    	return controller.getHotel( dateFrom, dateTo, location, hotelName, numberPeople, budget);
     }
     public void searchButtonAction(ActionEvent ae) {
     	this.parseInfo(this.getDepartureDate().trim(), this.getReturnDate().trim());

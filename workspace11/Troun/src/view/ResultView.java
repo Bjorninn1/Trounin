@@ -60,6 +60,7 @@ public class ResultView extends BasicPanel {
 			int minHotelPrice = Integer.MAX_VALUE;
 			int maxHotelPrice = Integer.MIN_VALUE;
 			HotelRoom[] rooms = hotels[i].getRooms();
+			System.out.println(rooms.length);
 			for (int j = 0; j < rooms.length; j++) {
 				minHotelPrice = rooms[j].getNightPrice() < minHotelPrice ? rooms[j].getNightPrice() : minHotelPrice;
 				maxHotelPrice = rooms[j].getNightPrice() > maxHotelPrice ? rooms[j].getNightPrice() : maxHotelPrice;
