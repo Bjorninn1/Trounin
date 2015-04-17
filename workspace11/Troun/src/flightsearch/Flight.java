@@ -9,6 +9,8 @@ public class Flight {
 	private int availableSeats;
 	private int price;
 	private String flightNumber;
+	private String fClass;
+	private String airline;
 	
 		public Flight (	String fromAirport, 
 						String toAirport, 
@@ -16,7 +18,7 @@ public class Flight {
 						Date dateArrival, 
 						int availableSeats, 
 						int price, 
-						String flightNumber) {
+						String flightNumber, String fClass, String airline) {
 		this.fromAirport = fromAirport;
 		this.toAirport = toAirport;
 		this.dateDeparture = dateDeparture;
@@ -24,6 +26,8 @@ public class Flight {
 		this.availableSeats = availableSeats;
 		this.price = price;
 		this.flightNumber = flightNumber;
+		this.fClass = fClass;
+		this.airline = airline;
 	}
 
 	public String getFromAirport() {
@@ -81,5 +85,11 @@ public class Flight {
 
 	public void setFlightNumber(String flightNumber) {
 		this.flightNumber = flightNumber;
+	}
+	public String getFClass() {
+		return this.fClass;
+	}
+	public String getAirline() {
+		return this.airline;
 	}
 }

@@ -98,6 +98,6 @@ public class DestinationTripPanel extends BasicPanel{
             Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, fromAirport, numberPeople, 300000000);   
             flights = new Flight[][] {flights1 , flights2, flights3, flights4};
         }
-        TripPlanning.tripPlanning.showResultsView(hotels, flights, dateDeparture, dateReturn);
+        TripPlanning.tripPlanning.showResultsView(hotels, flights, dateDeparture, dateReturn, numberPeople);
     }
 }

@@ -106,14 +106,13 @@ public class HotelManager {
 			}
 		}
 		
-		public Hotel[] findHotels(DateRange dates, String name){
+		public Hotel[] findHotels(DateRange dates, String name) {
 	    	Connection c = null;
 	    	Statement stmt = null;
 	    	ResultSet hotelCount = null;
-	  
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
-	    		c = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
+	    		c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 	    		stmt = c.createStatement();
 	    		
 	    		hotelCount = stmt.executeQuery("SELECT COUNT(*) FROM HOTELS");
@@ -169,8 +168,8 @@ public class HotelManager {
     		}finally {
 				try {
 	                if (c != null) {
-			        	stmt.close();
-						hotelCount.close();
+			        	if(stmt != null)stmt.close();
+						if(hotelCount != null)hotelCount.close();
 						c.close();
 	                } 
 	            } catch (SQLException e) {
@@ -183,7 +182,6 @@ public class HotelManager {
 	    	Connection c = null;
 	    	Statement stmt = null;
 	    	ResultSet hotelCount = null;
-	    
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
 	    		c = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
@@ -256,7 +254,6 @@ public class HotelManager {
 	    	Connection c = null;
 	    	Statement stmt = null;
 	    	ResultSet hotelCount = null;
-	    
 	    	try {
 	    		Class.forName("org.sqlite.JDBC");
 	    		c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
@@ -306,7 +303,6 @@ public class HotelManager {
 	    			hotels[i] = new Hotel(h.getInt("id"), h.getString("name"), h.getString("location"),
 	    					h.getInt("roomcount"), h.getString("address"));
 	    		}
-	    		
 	    		//stmt.close(); 
 	    		//c.close();
 	    		return hotels;
@@ -328,7 +324,7 @@ public class HotelManager {
     		}
 		}
 		
-		public static void main(String[] args)
+		/*public static void main(String[] args)
 		{
 			HotelManager h = new HotelManager();
 			DateRange dates = new DateRange();
@@ -345,5 +341,5 @@ public class HotelManager {
 			{
 				System.out.println(hs[j].getName());
 			}
-		}
+		}*/
 	}

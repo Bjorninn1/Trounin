@@ -42,7 +42,7 @@ public class OneClickTripPanel extends BasicPanel{
 	   
 	  	//DropDown menu for arrival location
 	    
-        this.comboBudget = this.addComboBox(c,this.getItemsBudget(),0,4,0,6);
+        //this.comboBudget = this.addComboBox(c,this.getItemsBudget(),0,4,0,6);
 
         //this.getComboHotels() = this.addComboBox(c,this.hotels, 0, 4, 0, 7);
         this.setComboHotels(c);
@@ -92,12 +92,12 @@ public class OneClickTripPanel extends BasicPanel{
             flights = new Flight[][] {flights1, flights2};
         }else{
             Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
-            Flight[] flights2 = this.searchFlight(dateDeparture, this.mainAirport, toAirport, numberPeople, 300);
+            Flight[] flights2 = this.searchFlight(dateDeparture, this.mainCityAirport, toAirport, numberPeople, 300);
             hotels = this.getHotel(dateDeparture, dateReturn, toAirport, hotel, numberPeople, 300);
-            Flight[] flights3 = this.searchFlight(dateReturn, toAirport, this.mainAirport, numberPeople, 300); 
+            Flight[] flights3 = this.searchFlight(dateReturn, toAirport, this.mainCityAirport, numberPeople, 300); 
             Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, fromAirport, numberPeople, 300);   
             flights = new Flight[][] {flights1, flights2, flights3, flights4};
         }
-        TripPlanning.tripPlanning.showResultsView(hotels, flights, dateDeparture, dateReturn);
+        TripPlanning.tripPlanning.showResultsView(hotels, flights, dateDeparture, dateReturn, numberPeople);
 	}	
 }

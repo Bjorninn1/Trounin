@@ -40,31 +40,22 @@ public abstract class BasicPanel extends JPanel {
 	String[] itemsToIceland = new String[]{"Specify area in Iceland", "Reykjavik", "Akureyri"};
 	String[] inlandAirports = new String[]{null, "KEF", "AK"};
 	String defaultString = itemsToIceland[0];
-	//String[] itemsFrom = new String[]{"select departure airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
 	String[] itemsFrom = new String[]{"select departure airport", "London", "Copenhagen", "Boston", "China"};
 	String[] foreignAirports = new String[] {null, "LHR", "CPH", "BOS", "PEK"};
 	String[] itemsTo = new String[]{"select arrival airport", "London", "Copenhagen", "Boston", "China"};
-	//String[] itemsTo = new String[]{"select arrival airport", "London", "Berlin", "Barcelona", "Paris", "Amsterdam"};
-	String[] itemsBudget = new String[]{"choose budget", "€1000", "€2000"};
-    String[] hotels = new String[] {"Hotel 1", "Hotel 2", "Hotel 3"};
+	String[] itemsBudget = new String[]{"choose budget", "$1000", "$1500", "$2000", "$2500", "$3000"};
+    String[] hotels = new String[] {"Hotel Kea", "Nordica Hotel", "Hotel Saga", "Hotel Ranga", "Grand Hotel", "Hotel Berg", "Hotel Keflavik", "Hotel Hallormsstadir", "Hotel Isafjordur", "Fosshotel"};
 	Controller controller = new Controller();
-	//KEF
-	//CPH
-	//RVK
-	//LHR
-	//BOS
-	//PEK
-	//AK
 
 	String mainAirport = "KEF";
 	String mainCityAirport = "RVK";
 	public BasicPanel() {
-		this.setPreferredSize(new Dimension(1000, 500));
+		this.setPreferredSize(new Dimension(500, 500));
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(5,5,5,5);
-        this.setBackground(Color.CYAN);
+        //this.setBackground(Color.CYAN);
         this.init(c);
 	}
 	abstract void init(GridBagConstraints c);
@@ -118,7 +109,6 @@ public abstract class BasicPanel extends JPanel {
 	}
 	public JList<String> addJList(GridBagConstraints c, String[] data, int gridWidth, int gridHeight, int gridX, int gridY) {
 		JList<String> list = new JList<String>(data);
-		//list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		c.gridwidth = gridWidth;
 		c.gridheight = gridHeight;
 		c.gridx = gridX;
@@ -189,13 +179,17 @@ public abstract class BasicPanel extends JPanel {
 	}
 	public void departureDateAction(ActionEvent ae) {
 	    this.textDeparture.setEditable(true);
-		this.textDeparture.setText(new DatePicker(this).setPickedDate());
+	    String day = new DatePicker(this).setPickedDate();
+	    if(!day.equals(""))
+			this.textDeparture.setText(day);
 	    this.textDeparture.setEditable(false);
 	}
 	
 	public void returnDateAction(ActionEvent ae) {
 		this.textReturn.setEditable(true);
-		this.textReturn.setText(new DatePicker(this).setPickedDate());
+		String day = new DatePicker(this).setPickedDate();
+		if(!day.equals(""))
+			this.textReturn.setText(day);
 		this.textReturn.setEditable(false);
 	}
 	public void infoBox(String infoMessage, String titleBar){
@@ -204,6 +198,10 @@ public abstract class BasicPanel extends JPanel {
     public int convertDateToInt(String a) {
     	a = a.substring(0,4) + a.substring(5,7) + a.substring(8,10);
     	return Integer.parseInt(a);
+    }
+    public String convertDateToString(Date date) {
+    	SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+    	return sdf2.format(date).toString();
     }
     public boolean validateDates(String a, String b) {
     	if(a.equals("") || b.equals(""))

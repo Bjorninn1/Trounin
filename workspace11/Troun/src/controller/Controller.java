@@ -11,7 +11,7 @@ public class Controller {
     //Pre: controller is an initialised object of this class, inputs have to make sense
     //Post: returns an array of flights that match the criteria
     public Flight[] searchFlight(String date, String fromAirport, String toAirport, int numberPeople, int budget) {
-        System.out.println("date: " + date + " fromAirport: " + fromAirport + " toAirport: " + toAirport);
+        //System.out.println("date: " + date + " fromAirport: " + fromAirport + " toAirport: " + toAirport);
         ArrayList<Flight> flightList = flightManager.dbflights(fromAirport, toAirport, date, numberPeople);
         Flight[] flights = flightList.toArray(new Flight[flightList.size()]);
         if(flights.length == 0) flights = this.reiterateSearchFlight(date, fromAirport, toAirport, numberPeople, budget);

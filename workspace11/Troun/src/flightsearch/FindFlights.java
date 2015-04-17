@@ -12,7 +12,7 @@ public class FindFlights {
 	Connection conn = null;
 	ResultSet rs = null;
 	PreparedStatement pst = null;
-	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public ArrayList<Flight> flights;
 	
@@ -22,14 +22,14 @@ public class FindFlights {
 		
 		flights = new ArrayList<Flight>();
 		System.out.println(fromAirport + " " + toAirport + " " + dateDeparture + " " + nrPassengers);
-		String sql = "SELECT * FROM Flights WHERE fromAirport=? AND toAirport=? AND dateDeparture=?"
+		String sql = "SELECT * FROM Flights3 WHERE fromAirport=? AND toAirport=? AND dateDeparture=?"
 				+ "AND availableSeats>=?";
 		try{
 			pst = conn.prepareStatement(sql);
 			pst.setString(1, fromAirport);
 			pst.setString(2, toAirport);
 			pst.setString(3, dateDeparture);
-			pst.setLong(4, nrPassengers);
+			pst.setInt(4, nrPassengers);
 			
 			rs = pst.executeQuery();
 			
@@ -39,11 +39,13 @@ public class FindFlights {
 				 */
 				String rsFromAirport = rs.getString("fromAirport");
 				String rsToAirport = rs.getString("toAirport");
-				Date rsDateDeparture = dateFormat.parse(rs.getString("dateDeparture"));
-				Date rsDateArrival = dateFormat.parse(rs.getString("dateArrival"));
+				Date rsDateDeparture = dateFormat.parse(rs.getString("dateDeparture")+" "+rs.getString("timeDeparture"));
+				Date rsDateArrival = dateFormat.parse(rs.getString("dateArrival")+" "+rs.getString("timeArrival"));
 				int rsAvailableSeats = rs.getInt("availableSeats");
 				int rsPrice = rs.getInt("price");
 				String rsFlightNumber = rs.getString("flightNumber");
+				String rsClass = rs.getString("class");
+				String rsAirline = rs.getString("airline");
 				
 				/**
 				 * Create a new Flight object with the data
@@ -54,7 +56,7 @@ public class FindFlights {
 												rsDateArrival, 
 												rsAvailableSeats, 
 												rsPrice, 
-												rsFlightNumber);
+												rsFlightNumber, rsClass, rsAirline);
 				
 	
 				/**
@@ -62,10 +64,10 @@ public class FindFlights {
 				 * match the criteria
 				 */
 				flights.add(rightFlight);
-				conn.close();
-				rs.close();
-				pst.close();
 			}
+			conn.close();
+			rs.close();
+			pst.close();
 		}
 		catch(Exception e)
 		{
@@ -93,7 +95,7 @@ public class FindFlights {
 		
 		conn = Db_connector.dbConnect();
 		
-		String sql = "SELECT DISTINCT fromAirport FROM flights";
+		String sql = "SELECT DISTINCT fromAirport FROM flights3";
 		
 		try{
 			pst = conn.prepareStatement(sql);
@@ -119,7 +121,7 @@ public class FindFlights {
 		
 		conn = Db_connector.dbConnect();
 		
-		String sql = "SELECT DISTINCT toAirport FROM flights";
+		String sql = "SELECT DISTINCT toAirport FROM flights3";
 		
 		try{
 			pst = conn.prepareStatement(sql);
@@ -144,11 +146,12 @@ public class FindFlights {
 	 * @param fromAirport is the name of the departing airport
 	 * @return Returns TRUE if successful, FALSE if failed
 	 */
-	public boolean bookFlight (String date, String flightNumber, int nrOfPassangers, String fromAirport){
+
+	public boolean bookFlight(String date, String flightNumber, int nrOfPassangers, String fromAirport){
 		int availableSeats = 0;
 		conn = Db_connector.dbConnect();
 		
-		String sql = "SELECT availableSeats FROM Flights WHERE flightNumber=? AND dateDeparture=?"
+		String sql = "SELECT availableSeats FROM Flights3 WHERE flightNumber=? AND dateDeparture=?"
 				+ " AND fromAirport=?";
 		
 		

@@ -99,20 +99,21 @@ public class StopoverTripPanel extends BasicPanel {
         }
         Flight[][] flights;
     	Hotel[] hotels;
-        if(airportIceland.equals(itemsIceland[1])) {
+        if(airportIceland.equals(this.mainAirport)) {
+        	//System.out.println("input: "+ dateDeparture + " " + fromAirport+" " + this.mainAirport+" " + toAirport);
             Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
             hotels = this.searchHotel(dateDeparture, dateReturn, hotelLocation, numberPeople, 300);
             Flight[] flights2 = this.searchFlight(dateReturn, this.mainAirport, toAirport, numberPeople, 300);
             flights = new Flight[][] {flights1, flights2};
         }else{
             Flight[] flights1 = this.searchFlight(dateDeparture, fromAirport, this.mainAirport, numberPeople, 300);
-            Flight[] flights2 = this.searchFlight(dateDeparture, this.mainAirport, airportIceland, numberPeople, 300);
+            Flight[] flights2 = this.searchFlight(dateDeparture, this.mainCityAirport, airportIceland, numberPeople, 300);
             hotels = this.searchHotel(dateDeparture, dateReturn, hotelLocation, numberPeople, 300);
-            Flight[] flights3 = this.searchFlight(dateReturn, airportIceland, this.mainAirport, numberPeople, 300); 
+            Flight[] flights3 = this.searchFlight(dateReturn, airportIceland, this.mainCityAirport, numberPeople, 300); 
             Flight[] flights4 = this.searchFlight(dateReturn, this.mainAirport, toAirport, numberPeople, 300);   
             flights = new Flight[][] {flights1, flights2, flights3, flights4};
         }
-        TripPlanning.tripPlanning.showResultsView(hotels, flights, dateDeparture, dateReturn);
+        TripPlanning.tripPlanning.showResultsView(hotels, flights, dateDeparture, dateReturn, numberPeople);
 	}
 	
 

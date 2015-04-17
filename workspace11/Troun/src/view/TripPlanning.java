@@ -24,6 +24,7 @@ public class TripPlanning extends JPanel {
     
     private static final long serialVersionUID = 1L;
     boolean resultsShown = false;
+    boolean hotelsShown = false;
 
     public TripPlanning() {
         
@@ -59,15 +60,29 @@ public class TripPlanning extends JPanel {
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         
     }//constructor endar hér
-    public void showResultsView(Hotel[] hotels, Flight[][] flights, String dateDeparture, String dateReturn) {
-        if(this.resultsShown)
+    public void showResultsView(Hotel[] hotels, Flight[][] flights, String dateDeparture, String dateReturn, int numberPeople) {
+        if(this.hotelsShown) {
+            tabbedPane.remove(4);
+            this.hotelsShown = false;
+        }
+        if(this.resultsShown){
             tabbedPane.remove(3);
+        }
         else
             this.resultsShown = !this.resultsShown;
+        //System.out.println(flights[0].length);
         //tabbedPane.setEnabledAt(3, true);
-        tabbedPane.insertTab("Results", null, new ResultView(hotels, flights, dateDeparture, dateReturn), "Search Results",3);
+        //tabbedPane.insertTab("Results", null, new ResultView(hotels, flights, dateDeparture, dateReturn), "Search Results",3);
+        tabbedPane.insertTab("Flight Results", null, new FlightResultView(hotels, flights, dateDeparture, dateReturn, numberPeople), "Flight Results",3);
         tabbedPane.setMnemonicAt(3, KeyEvent.VK_4);
         tabbedPane.setSelectedIndex(3);
+    }
+    public void showHotelView(Hotel [] hotels, Flight[] flightsToBook, String dateDeparture, String dateReturn, int numberPeople) {
+        if(this.hotelsShown) tabbedPane.remove(4); 
+        tabbedPane.insertTab("Hotel Results", null, new HotelResultView(hotels, flightsToBook, dateDeparture, dateReturn, numberPeople), "Hotel Results",4);
+        tabbedPane.setMnemonicAt(4, KeyEvent.VK_5);
+        tabbedPane.setSelectedIndex(4);       
+        this.hotelsShown = true; 
     }
     /**
      * Create the GUI and show it.  For thread safety,
@@ -104,6 +119,9 @@ public class TripPlanning extends JPanel {
                 createAndShowGUI();
             }
         });
+    }
+    public void book() {
+        System.out.println("da booking commences");
     }
 }
 

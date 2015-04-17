@@ -8,7 +8,7 @@ public class Hotel {
 	private String address;
 	private String location;
 	private String name;
-	private Comment[] comments;
+	//private Comment[] comments;
 	private HotelRoom[] hotelRooms;
 	
 	Hotel(int id, String name,String loc, int rooms, String addr )
@@ -42,10 +42,10 @@ public class Hotel {
 	{
 		return id;
 	}
-	public Comment[] getComments()
+	/*public Comment[] getComments()
 	{
 		return comments;
-	}
+	}**/
 	public HotelRoom[] getRooms()
 	{
 		return hotelRooms;
@@ -57,7 +57,7 @@ public class Hotel {
 		Statement stmt = null;
 		try{
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
+			conn = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 			stmt = conn.createStatement();
 			
 			int[] criMatches = new int[this.roomCount];
@@ -117,7 +117,7 @@ public class Hotel {
 	    ResultSet count = null;
 	    try {
 	    	Class.forName("org.sqlite.JDBC");
-	    	c = DriverManager.getConnection("jdbc:sqlite:HotelDB.db");
+	    	c = DriverManager.getConnection("jdbc:sqlite:..\\HotelDB.db");
 	
 	    	stmt = c.createStatement();
 	    		
@@ -145,9 +145,9 @@ public class Hotel {
         	try {
                 if (c != null) {
                     //con.close();
-		        	stmt.close();
 			    	c.close();
-			    	count.close();
+		        	if(stmt != null)stmt.close();
+			    	if(count != null)count.close();
                 }
             } catch (SQLException ignored) {
             	ignored.printStackTrace();
@@ -156,7 +156,7 @@ public class Hotel {
 
 	}
 	
-	public boolean submitComment(String comment, int userId)
+	/*public boolean submitComment(String comment, int userId)
 	{
 		Connection conn = null;
 		Statement stmt = null;
@@ -193,9 +193,9 @@ public class Hotel {
 			System.out.print(e.getMessage());
 			return false;
 		}
-	}
+	}*/
 	
-	public boolean deleteComment(int userId) 
+	/*public boolean deleteComment(int userId) 
 	{
 		Connection conn = null;
 		Statement stmt = null;
@@ -230,9 +230,9 @@ public class Hotel {
 			return false;
 		}
 
-	}
+	}*/
 	
-	public Comment[] loadComments(int hotelId)
+	/*public Comment[] loadComments(int hotelId)
 	{
 		Connection conn = null;
 		Statement stmt = null;
@@ -270,7 +270,7 @@ public class Hotel {
 			System.out.println(e.getMessage());
 			return new Comment[0];
 		}
-	}
+	}*/
 	
 	public HotelRoom[] loadRooms(int hotelId)
 	{
