@@ -86,6 +86,50 @@ public class FindFlights {
 		
 		return flights;
 	}
+	public boolean checkFlightavailablity (String date, String flightNumber, int nrOfPassengers, String fromAirport){
+		int availableSeats = 0;
+		conn = Db_connector.dbConnect();
+		
+		String sql = "SELECT availableSeats FROM Flights WHERE flightNumber=? AND dateDeparture=?"
+				+ " AND fromAirport=?";
+		
+		
+		try{
+			pst = conn.prepareStatement(sql);
+			pst.setString(1, flightNumber);
+			pst.setString(2, date);
+			pst.setString(3, fromAirport);
+			
+			rs = pst.executeQuery();
+			
+			
+			while(rs.next()){
+				availableSeats = rs.getInt("availableSeats");
+				//System.out.println(availableSeats);
+			}
+			pst.close();
+			rs.close();
+			conn.close();
+		}
+		catch(Exception e){
+			System.out.println(e);
+			return false;
+		}finally {
+			try {
+				if(pst!= null) pst.close();
+				if(rs!= null) rs.close();
+				if(conn!= null) conn.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(availableSeats >= nrOfPassengers){
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	/**
 	 * @return Returns an ArrayList with names of available fromAirports

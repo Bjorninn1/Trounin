@@ -153,7 +153,7 @@ public class FlightResultView extends BasicPanel {
             	}
                 if(FlightResultView.this.allCBset(indice)) {
 	                Flight selected = FlightResultView.this.findFlight(indice, (String)FlightResultView.this.airlines[indice].getSelectedItem(), (String)FlightResultView.this.flightTimes[indice].getSelectedItem(), (String)FlightResultView.this.classes[indice].getSelectedItem());
-	                FlightResultView.this.prices[indice].setText("$"+(selected.getPrice()/120));
+	                if(selected != null)FlightResultView.this.prices[indice].setText("$"+(selected.getPrice()/120));
                 }
                 FlightResultView.this.isChanging = false;
 	    	}

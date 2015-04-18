@@ -88,11 +88,16 @@ public class HotelResultView extends BasicPanel {
     	Hotel hotel = this.hotels[hotelCB.getSelectedIndex()-1];
     	HotelRoom room = hotel.getRooms()[roomsCB.getSelectedIndex()-1];
         DateRange dateR = new DateRange(Integer.parseInt(this.dateDeparture.substring(8)),Integer.parseInt(this.dateDeparture.substring(5,7)),Integer.parseInt(this.dateDeparture.substring(0,4)),Integer.parseInt(this.dateReturn.substring(8)),Integer.parseInt(this.dateReturn.substring(5,7)),Integer.parseInt(this.dateReturn.substring(0,4)));
-    	//hotel.bookHotelRoom(dateR, room);
-        TripPlanning.tripPlanning.book();
         int costRoom = room.getNightPrice();
         int days = this.convertDateToInt(this.dateReturn)-this.convertDateToInt(this.dateDeparture);
         int totalCost = costRoom*days;
+
+    	Controller controller = new Controller();
+        boolean valid = controlller.book(flightsToBook, hotel, room, this.numberPeople);
+        if(!valid) {
+        	this.infoBox("Booking unsuccessful, please pick something else", "Error");
+        	return;
+        }
         for(int i = 0; i < this.flightsToBook.length; i++) {
         	totalCost += this.flightsToBook[i].getPrice()/120;
         }

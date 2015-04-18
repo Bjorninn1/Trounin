@@ -4,9 +4,12 @@ package controller;
 import flightsearch.*;
 import Archive.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 public class Controller {
     HotelManager hotelManager = new HotelManager();
     FindFlights flightManager = new FindFlights();
+    DateRange dateRange;
     //Use: contoller.searchFlight(date, fromAirport, toAirport, numberPeople, budget)
     //Pre: controller is an initialised object of this class, inputs have to make sense
     //Post: returns an array of flights that match the criteria
@@ -25,8 +28,8 @@ public class Controller {
     //DateRange dates, int budget, int persons, String loc
     public Hotel[] searchHotel(String dateFrom, String dateTo, String location, int numberPeople, int budget) {
         if(location == "Akureyri") location = "Nordurland";
-        DateRange dateR = new DateRange(Integer.parseInt(dateFrom.substring(8)),Integer.parseInt(dateFrom.substring(5,7)),Integer.parseInt(dateFrom.substring(0,4)),Integer.parseInt(dateTo.substring(8)),Integer.parseInt(dateTo.substring(5,7)),Integer.parseInt(dateTo.substring(0,4)));
-        Hotel[] hotels = hotelManager.findHotels(dateR, budget, numberPeople, location);
+        this.dateRange = new DateRange(Integer.parseInt(dateFrom.substring(8)),Integer.parseInt(dateFrom.substring(5,7)),Integer.parseInt(dateFrom.substring(0,4)),Integer.parseInt(dateTo.substring(8)),Integer.parseInt(dateTo.substring(5,7)),Integer.parseInt(dateTo.substring(0,4)));
+        Hotel[] hotels = hotelManager.findHotels(this.dateRange, budget, numberPeople, location);
         if(hotels.length == 0) hotels = this.reiterateSearchHotel(dateFrom, dateTo, location, numberPeople, budget);
         return hotels;
     } 
@@ -37,8 +40,8 @@ public class Controller {
     //DateRange dates, String name
     public Hotel[] getHotel(String dateFrom, String dateTo, String location, String hotelName, int numberPeople, int budget) {
         if(location == "Akureyri") location = "Nordurland";
-        DateRange dateR = new DateRange(Integer.parseInt(dateFrom.substring(8)),Integer.parseInt(dateFrom.substring(5,7)),Integer.parseInt(dateFrom.substring(0,4)),Integer.parseInt(dateTo.substring(8)),Integer.parseInt(dateTo.substring(5,7)),Integer.parseInt(dateTo.substring(0,4)));
-        Hotel[] hotels = hotelManager.findHotels(dateR, hotelName);
+        this.dateRange = new DateRange(Integer.parseInt(dateFrom.substring(8)),Integer.parseInt(dateFrom.substring(5,7)),Integer.parseInt(dateFrom.substring(0,4)),Integer.parseInt(dateTo.substring(8)),Integer.parseInt(dateTo.substring(5,7)),Integer.parseInt(dateTo.substring(0,4)));
+        Hotel[] hotels = hotelManager.findHotels(this.dateRange, hotelName);
         if(hotels.length == 0) hotels = this.reiterateGetHotel(dateFrom, dateTo, location, hotelName, numberPeople, budget);
         return hotels;
     }
@@ -94,5 +97,23 @@ public class Controller {
     }
     private int raiseBudget(int budget) {
         return (int)(budget*1.1);
+    }
+    public boolean checkAvailability(Flight[] flightsToBook, Hotel hotel, HotelRoom room, int numberPeople) {
+        boolean valid = true;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        for(int i = 0; i < flightsToBook.length && valid; i++) {
+            valid = valid && flightManager.checkFlightavailablity(sdf.format(flightsToBook[i].getDateDeparture()).toString(), flightsToBook[i].getFlightNumber(), numberPeople, flightsToBook[i].getFromAirport());
+        }
+        return valid;
+    }
+    public boolean book(Flight[] flightsToBook, Hotel hotel, HotelRoom room, int numberPeople) {
+        boolean valid = this.checkAvailability(flightsToBook, hotel, room, numberPeople);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        valid = valid && hotel.bookHotelRoom(this.dateRange, room);
+        if(!valid) return valid;
+        for(int i = 0; i < flightsToBook.length && valid; i++) {
+            valid = valid && flightManager.bookFlight(sdf.format(flightsToBook[i].getDateDeparture()).toString(), flightsToBook[i].getFlightNumber(), numberPeople, flightsToBook[i].getFromAirport());
+        }
+        return valid;
     }
 }
